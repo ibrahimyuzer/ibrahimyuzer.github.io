@@ -263,7 +263,7 @@
 
     <div class="hero-top">
 
-      <img src="profil.jpg" class="profile">
+      <img src="profil.jpg" class="profile" style="border-radius:50%;">
 
       <div>
         <h1 id="name">İbrahim Yüzer</h1>
@@ -283,9 +283,13 @@
             WhatsApp
           </a>
 
+          <!-- CV BUTONU ŞİMDİLİK GİZLİ -->
+
+          <!--
           <a class="btn" href="cv.pdf" download>
             CV Download
           </a>
+          -->
 
           <a class="btn" href="#" onclick="setLang('tr')">
             Türkçe
@@ -293,6 +297,14 @@
 
           <a class="btn" href="#" onclick="setLang('en')">
             English
+          </a>
+
+          <a class="btn" href="#" onclick="setLang('id')">
+            Indonesia
+          </a>
+
+          <a class="btn" href="#" onclick="setLang('ar')">
+            العربية
           </a>
 
         </div>
@@ -305,25 +317,36 @@
         <h2>Skills</h2>
 
         <div class="skills">
-          <div class="skill">Turkish Teaching</div>
-          <div class="skill">YouTube Shorts</div>
-          <div class="skill">CapCut</div>
-          <div class="skill">AI Tools</div>
-          <div class="skill">Social Media</div>
-          <div class="skill">GitHub Pages</div>
-          <div class="skill">Digital Marketing</div>
-          <div class="skill">Content Production</div>
+          <div class="skill">Türkçe Eğitimi</div>
+          <div class="skill">Arapça Tercümanlık</div>
+          <div class="skill">Bahasa Indonesia</div>
+          <div class="skill">Öğretmenlik</div>
+          <div class="skill">E-Book Tasarımı</div>
+          <div class="skill">Broşür Tasarımı</div>
+          <div class="skill">Afiş & Branda Tasarımı</div>
+          <div class="skill">YouTube İçerikleri</div>
+          <div class="skill">Canva & CapCut</div>
+          <div class="skill">Sosyal Medya</div>
+          <div class="skill">Dijital İçerik Üretimi</div>
+          <div class="skill">AI Araçları</div>
         </div>
+      </div>
       </div>
 
       <div class="card">
         <h2>Contact</h2>
 
-        <p>📞 +62 xxx xxx xxx</p>
+        <p>📞 +90 546 934 73 21</p>
         <br>
-        <p>✉️ mail@example.com</p>
+        <p>✉️ ibrahimyuzer@outlook.com</p>
         <br>
-        <p>📷 instagram.com/kullaniciadi</p>
+        <p>📷 Instagram: hidden</p>
+        <br>
+        <p>▶️ YouTube: hidden</p>
+        <br>
+        <p>🎵 TikTok: hidden</p>
+        <br>
+        <p>📘 Facebook: hidden</p>
         <br>
         <p>▶️ youtube.com/@kanal</p>
       </div>
@@ -331,12 +354,8 @@
       <div class="card">
         <h2>Terminal</h2>
 
-        <div class="terminal">
+        <div class="terminal" id="terminal">
           > initializing portfolio...<br>
-          > loading projects...<br>
-          > connecting creative systems...<br>
-          > status: online<br>
-          > welcome visitor_
         </div>
       </div>
 
@@ -372,15 +391,58 @@ function setLang(lang){
   if(lang === 'tr'){
     document.getElementById('title').innerHTML = 'Türkçe Eğitmeni • İçerik Üreticisi • Dijital Projeler';
 
-    document.getElementById('desc').innerHTML = 'Endonezya’da Türkçe eğitimi, dijital içerik üretimi ve modern medya projeleri üzerine çalışmalar yapıyorum. Eğitim ile teknolojiyi bir araya getirerek sade ama etkili sistemler geliştirmeyi seviyorum.';
+    document.getElementById('desc').innerHTML = 'Endonezya’da Türkçe eğitimi, dijital içerik üretimi ve modern medya projeleri üzerine çalışmalar yapıyorum.';
   }
 
   if(lang === 'en'){
     document.getElementById('title').innerHTML = 'Turkish Teacher • Content Creator • Digital Projects';
 
-    document.getElementById('desc').innerHTML = 'I work on Turkish language education, digital content production and modern media projects in Indonesia. I enjoy building simple but effective systems by combining education and technology.';
+    document.getElementById('desc').innerHTML = 'I work on Turkish language education, digital content production and modern media projects in Indonesia.';
+  }
+
+  if(lang === 'id'){
+    document.getElementById('title').innerHTML = 'Pengajar Bahasa Turki • Kreator Konten • Proyek Digital';
+
+    document.getElementById('desc').innerHTML = 'Saya bekerja di bidang pendidikan bahasa Turki dan produksi konten digital di Indonesia.';
+  }
+
+  if(lang === 'ar'){
+    document.getElementById('title').innerHTML = 'مدرس اللغة التركية • صانع محتوى • مشاريع رقمية';
+
+    document.getElementById('desc').innerHTML = 'أعمل في تعليم اللغة التركية وإنتاج المحتوى الرقمي في إندونيسيا.';
   }
 }
+
+const lines = [
+'> initializing portfolio...',
+'> loading multilingual system...',
+'> connecting digital projects...',
+'> activating creative modules...',
+'> status: online',
+'> welcome visitor_'
+];
+
+let i = 0;
+const terminal = document.getElementById('terminal');
+
+function typeTerminal(){
+
+  if(i < lines.length){
+    terminal.innerHTML += lines[i] + '<br>';
+    i++;
+    setTimeout(typeTerminal, 900);
+  }
+  else {
+    setTimeout(()=>{
+      terminal.innerHTML = '';
+      i = 0;
+      typeTerminal();
+    },2000);
+  }
+}
+
+terminal.innerHTML = '';
+typeTerminal();
 
 </script>
 
