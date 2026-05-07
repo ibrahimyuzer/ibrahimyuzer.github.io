@@ -181,7 +181,7 @@
     .grid {
       margin-top: 30px;
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+      grid-template-columns: repeat(2,minmax(0,1fr));
       gap: 20px;
     }
 
@@ -233,10 +233,30 @@
       font-size: 14px;
     }
 
+    @media(max-width: 900px){
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media(max-width: 768px){
       .hero {
         padding: 30px;
       }
+
+      .hero-top {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 38px;
+      }
+
+      .buttons {
+        justify-content: center;
+      }
+    }
 
       h1 {
         font-size: 38px;
@@ -314,7 +334,7 @@
     <div class="grid">
 
       <div class="card">
-        <h2>Skills</h2>
+        <h2 id="skillsTitle">Skills</h2>
 
         <div class="skills">
           <div class="skill">Türkçe Eğitimi</div>
@@ -334,25 +354,25 @@
       </div>
 
       <div class="card">
-        <h2>Contact</h2>
+        <h2 id="contactTitle">Contact</h2>
 
-        <p>📞 +90 546 934 73 21</p>
+        <p id="phoneText">📞 Phone: +90 546 934 73 21</p>
         <br>
-        <p>✉️ ibrahimyuzer@outlook.com</p>
+        <p id="mailText">✉️ Mail: ibrahimyuzer@outlook.com</p>
         <br>
-        <p>📷 Instagram: hidden</p>
+        <p id="instagramText">📷 Instagram: hidden</p>
         <br>
-        <p>▶️ YouTube: hidden</p>
+        <p id="youtubeText">▶️ YouTube: hidden</p>
         <br>
-        <p>🎵 TikTok: hidden</p>
+        <p id="tiktokText">🎵 TikTok: hidden</p>
         <br>
-        <p>📘 Facebook: hidden</p>
+        <p id="facebookText">📘 Facebook: hidden</p>
         <br>
         <p>▶️ youtube.com/@kanal</p>
       </div>
 
       <div class="card">
-        <h2>Terminal</h2>
+        <h2 id="terminalTitle">Terminal</h2>
 
         <div class="terminal" id="terminal">
           > initializing portfolio...<br>
@@ -360,9 +380,9 @@
       </div>
 
       <div class="card">
-        <h2>QR Card</h2>
+        <h2 id="qrTitle">QR Card</h2>
 
-        <p>
+        <p id="qrDesc">
           QR kodunu telefonla okutarak direkt iletişime geçilebilir.
         </p>
 
@@ -390,51 +410,70 @@ function setLang(lang){
 
   if(lang === 'tr'){
     document.getElementById('title').innerHTML = 'Türkçe Eğitmeni • İçerik Üreticisi • Dijital Projeler';
-
     document.getElementById('desc').innerHTML = 'Endonezya’da Türkçe eğitimi, dijital içerik üretimi ve modern medya projeleri üzerine çalışmalar yapıyorum.';
+    document.getElementById('skillsTitle').innerHTML = 'Yetenekler';
+    document.getElementById('contactTitle').innerHTML = 'İletişim';
+    document.getElementById('terminalTitle').innerHTML = 'Terminal';
+    document.getElementById('qrTitle').innerHTML = 'QR Kart';
+    document.getElementById('phoneText').innerHTML = '📞 Telefon: +90 546 934 73 21';
+    document.getElementById('mailText').innerHTML = '✉️ Mail: ibrahimyuzer@outlook.com';
+    document.getElementById('instagramText').innerHTML = '📷 Instagram: hidden';
+    document.getElementById('youtubeText').innerHTML = '▶️ YouTube: hidden';
+    document.getElementById('tiktokText').innerHTML = '🎵 TikTok: hidden';
+    document.getElementById('facebookText').innerHTML = '📘 Facebook: hidden';
+    document.getElementById('qrDesc').innerHTML = 'QR kodunu telefonla okutarak direkt iletişime geçilebilir.';
   }
 
   if(lang === 'en'){
     document.getElementById('title').innerHTML = 'Turkish Teacher • Content Creator • Digital Projects';
-
     document.getElementById('desc').innerHTML = 'I work on Turkish language education, digital content production and modern media projects in Indonesia.';
+    document.getElementById('skillsTitle').innerHTML = 'Skills';
+    document.getElementById('contactTitle').innerHTML = 'Contact';
+    document.getElementById('terminalTitle').innerHTML = 'Terminal';
+    document.getElementById('qrTitle').innerHTML = 'QR Card';
+    document.getElementById('phoneText').innerHTML = '📞 Phone: +90 546 934 73 21';
+    document.getElementById('mailText').innerHTML = '✉️ Mail: ibrahimyuzer@outlook.com';
+    document.getElementById('instagramText').innerHTML = '📷 Instagram: hidden';
+    document.getElementById('youtubeText').innerHTML = '▶️ YouTube: hidden';
+    document.getElementById('tiktokText').innerHTML = '🎵 TikTok: hidden';
+    document.getElementById('facebookText').innerHTML = '📘 Facebook: hidden';
+    document.getElementById('qrDesc').innerHTML = 'Scan the QR code to contact directly.';
   }
 
   if(lang === 'id'){
     document.getElementById('title').innerHTML = 'Pengajar Bahasa Turki • Kreator Konten • Proyek Digital';
-
     document.getElementById('desc').innerHTML = 'Saya bekerja di bidang pendidikan bahasa Turki dan produksi konten digital di Indonesia.';
+    document.getElementById('skillsTitle').innerHTML = 'Keahlian';
+    document.getElementById('contactTitle').innerHTML = 'Kontak';
+    document.getElementById('terminalTitle').innerHTML = 'Terminal';
+    document.getElementById('qrTitle').innerHTML = 'Kartu QR';
+    document.getElementById('phoneText').innerHTML = '📞 Telepon: +90 546 934 73 21';
+    document.getElementById('mailText').innerHTML = '✉️ Email: ibrahimyuzer@outlook.com';
+    document.getElementById('instagramText').innerHTML = '📷 Instagram: hidden';
+    document.getElementById('youtubeText').innerHTML = '▶️ YouTube: hidden';
+    document.getElementById('tiktokText').innerHTML = '🎵 TikTok: hidden';
+    document.getElementById('facebookText').innerHTML = '📘 Facebook: hidden';
+    document.getElementById('qrDesc').innerHTML = 'Scan QR untuk menghubungi langsung.';
   }
 
   if(lang === 'ar'){
     document.getElementById('title').innerHTML = 'مدرس اللغة التركية • صانع محتوى • مشاريع رقمية';
-
     document.getElementById('desc').innerHTML = 'أعمل في تعليم اللغة التركية وإنتاج المحتوى الرقمي في إندونيسيا.';
+    document.getElementById('skillsTitle').innerHTML = 'المهارات';
+    document.getElementById('contactTitle').innerHTML = 'التواصل';
+    document.getElementById('terminalTitle').innerHTML = 'الطرفية';
+    document.getElementById('qrTitle').innerHTML = 'رمز QR';
+    document.getElementById('phoneText').innerHTML = '📞 الهاتف: +90 546 934 73 21';
+    document.getElementById('mailText').innerHTML = '✉️ البريد: ibrahimyuzer@outlook.com';
+    document.getElementById('instagramText').innerHTML = '📷 إنستغرام: hidden';
+    document.getElementById('youtubeText').innerHTML = '▶️ يوتيوب: hidden';
+    document.getElementById('tiktokText').innerHTML = '🎵 تيك توك: hidden';
+    document.getElementById('facebookText').innerHTML = '📘 فيسبوك: hidden';
+    document.getElementById('qrDesc').innerHTML = 'قم بمسح رمز QR للتواصل مباشرة.';
   }
 }
 
 const lines = [
-'> initializing portfolio...',
-'> loading multilingual system...',
-'> connecting digital projects...',
-'> activating creative modules...',
-'> status: online',
-'> welcome visitor_'
-];
-
-let i = 0;
-const terminal = document.getElementById('terminal');
-
-function typeTerminal(){
-
-  if(i < lines.length){
-    terminal.innerHTML += lines[i] + '<br>';
-    i++;
-    setTimeout(typeTerminal, 900);
-  }
-  else {
-    setTimeout(()=>{
-      terminal.innerHTML = '';
       i = 0;
       typeTerminal();
     },2000);
