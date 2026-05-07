@@ -140,7 +140,7 @@
     .profile {
       width: 160px;
       height: 160px;
-      border-radius: 50%; /* Kenarları tam yuvarlak yapıldı */
+      border-radius: 50%;
       object-fit: cover;
       border: 2px solid rgba(255,255,255,0.15);
       box-shadow: 0 0 30px rgba(0,240,255,0.25);
@@ -226,11 +226,10 @@
       color: #00ff95;
       line-height: 1.8;
       overflow-x: auto;
-      direction: ltr; /* Terminal her zaman soldan sağa kalır */
+      direction: ltr;
       text-align: left;
     }
 
-    /* Terminal yanıp sönme efekti */
     .cursor {
       display: inline-block;
       width: 10px;
@@ -258,7 +257,6 @@
       font-size: 14px;
     }
 
-    /* Gizli öğeler sınıfı */
     .hidden {
       display: none !important;
     }
@@ -294,7 +292,7 @@
         </div>
 
         <p class="description" id="desc">
-          Endonezya’da Türkçe eğitimi veriyor, Arapça tercümanlık yapıyor ve grafik tasarım (e-kitap, broşür, afiş) süreçlerini yürütüyorum. Eğitim tecrübemi; yazılım geliştirme ve dijital projelerle birleştirerek modern çözümler üretiyorum.
+          Endonezya’da Türkçe eğitimi veriyor, Arapça tercümanlık yapıyor ve grafik tasarım (e-kitap, broşür, afiş, branda) süreçlerini yürütüyorum.
         </p>
 
         <div class="buttons">
@@ -302,7 +300,6 @@
             WhatsApp
           </a>
           
-          <!-- İleride kullanmak için CV indirme butonu, şu an gizli -->
           <a class="btn hidden" href="cv.pdf" download id="btnCv">
             CV Download
           </a>
@@ -329,7 +326,6 @@
         <br>
         <p>✉️ ibrahimyuzer@outlook.com</p>
         
-        <!-- Sosyal medya hesapları ilerisi için eklendi, şu an gizli (hidden sınıfı ile) -->
         <div class="hidden">
           <br>
           <p>📷 instagram.com/kullaniciadi</p>
@@ -377,9 +373,9 @@ function toggleTheme(){
 const translations = {
   tr: {
     title: "Türkçe Eğitmeni • Çevirmen • Tasarımcı",
-    desc: "Endonezya’da Türkçe eğitimi veriyor, Arapça tercümanlık yapıyor ve grafik tasarım (e-kitap, broşür, afiş, branda) süreçlerini yürütüyorum. Eğitim tecrübemi; yazılım geliştirme (React, Kotlin) ve ticaret botları gibi dijital projelerle birleştirerek modern çözümler üretiyorum.",
+    desc: "Endonezya’da Türkçe eğitimi veriyor, Arapça tercümanlık yapıyor ve grafik tasarım (e-kitap, broşür, afiş, branda) süreçlerini yürütüyorum.",
     skillsTitle: "Yetenekler",
-    skills: ["Türkçe Öğretmenliği", "Arapça Tercümanlık", "Endonezce", "Grafik Tasarım (E-kitap, Broşür)", "Branda & Afiş Tasarımı", "Yazılım Geliştirme", "Ticaret Botları", "Eğitim Yönetimi"],
+    skills: ["Türkçe Öğretmenliği", "Arapça Tercümanlık", "Endonezce", "Grafik Tasarım (E-kitap, Broşür)", "Branda & Afiş Tasarımı", "HTML & CSS", "Python (Temel)", "Eğitim Yönetimi"],
     contactTitle: "İletişim",
     terminalTitle: "Sistem Terminali",
     term1: "> portfolyo başlatılıyor...",
@@ -395,9 +391,9 @@ const translations = {
   },
   en: {
     title: "Turkish Teacher • Translator • Designer",
-    desc: "I teach Turkish, work as an Arabic translator, and handle graphic design (e-books, brochures, posters) in Indonesia. I combine my educational background with software development (React, Kotlin) and digital projects like trading bots to create modern solutions.",
+    desc: "I teach Turkish, work as an Arabic translator, and handle graphic design (e-books, brochures, posters, banners) in Indonesia.",
     skillsTitle: "Skills",
-    skills: ["Turkish Teaching", "Arabic Translation", "Indonesian Language", "Graphic Design (E-book, Brochure)", "Banner & Poster Design", "Software Development", "Trading Bots", "Education Management"],
+    skills: ["Turkish Teaching", "Arabic Translation", "Indonesian Language", "Graphic Design (E-book, Brochure)", "Banner & Poster Design", "HTML & CSS", "Python (Basic)", "Education Management"],
     contactTitle: "Contact",
     terminalTitle: "System Terminal",
     term1: "> initializing portfolio...",
@@ -413,9 +409,9 @@ const translations = {
   },
   ar: {
     title: "مدرس لغة تركية • مترجم • مصمم",
-    desc: "أقوم بتدريس اللغة التركية، وأعمل كمترجم للغة العربية، وأدير أعمال التصميم الجرافيكي (الكتب الإلكترونية، الكتيبات، الملصقات) في إندونيسيا. أجمع بين خبرتي التعليمية وتطوير البرمجيات والمشاريع الرقمية لإنتاج حلول حديثة.",
+    desc: "أقوم بتدريس اللغة التركية، وأعمل كمترجم للغة العربية، وأدير أعمال التصميم الجرافيكي (الكتب الإلكترونية، الكتيبات، الملصقات، اللافتات) في إندونيسيا.",
     skillsTitle: "المهارات",
-    skills: ["تعليم اللغة التركية", "الترجمة العربية", "اللغة الإندونيسية", "تصميم الجرافيك", "تصميم الملصقات واللافتات", "تطوير البرمجيات", "روبوتات التداول", "الإدارة التعليمية"],
+    skills: ["تعليم اللغة التركية", "الترجمة العربية", "اللغة الإندونيسية", "تصميم الجرافيك", "تصميم الملصقات واللافتات", "HTML & CSS", "بايثون (أساسي)", "الإدارة التعليمية"],
     contactTitle: "اتصال",
     terminalTitle: "محطة النظام",
     term1: "> جاري تهيئة المحفظة...",
@@ -431,9 +427,9 @@ const translations = {
   },
   id: {
     title: "Guru Bahasa Turki • Penerjemah • Desainer",
-    desc: "Saya mengajar bahasa Turki, bekerja sebagai penerjemah bahasa Arab, dan menangani desain grafis (e-book, brosur, poster, spanduk) di Indonesia. Saya menggabungkan pengalaman pendidikan saya dengan pengembangan perangkat lunak (React, Kotlin) dan proyek digital untuk menciptakan solusi modern.",
+    desc: "Saya mengajar bahasa Turki, bekerja sebagai penerjemah bahasa Arab, dan menangani desain grafis (e-book, brosur, poster, spanduk) di Indonesia.",
     skillsTitle: "Keahlian",
-    skills: ["Mengajar Bahasa Turki", "Penerjemah Bahasa Arab", "Bahasa Indonesia", "Desain Grafis (E-book, Brosur)", "Desain Spanduk & Poster", "Pengembangan Perangkat Lunak", "Bot Trading", "Manajemen Pendidikan"],
+    skills: ["Mengajar Bahasa Turki", "Penerjemah Bahasa Arab", "Bahasa Indonesia", "Desain Grafis (E-book, Brosur)", "Desain Spanduk & Poster", "HTML & CSS", "Python (Dasar)", "Manajemen Pendidikan"],
     contactTitle: "Kontak",
     terminalTitle: "Terminal Sistem",
     term1: "> menginisialisasi portofolio...",
@@ -450,12 +446,10 @@ const translations = {
 };
 
 function setLang(lang){
-  // Sayfa yönünü Arapça için ayarla
   document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
 
   const t = translations[lang];
 
-  // Metin Güncellemeleri
   document.getElementById('title').innerText = t.title;
   document.getElementById('desc').innerText = t.desc;
   document.getElementById('skillsTitle').innerText = t.skillsTitle;
@@ -472,7 +466,6 @@ function setLang(lang){
   document.getElementById('btnWa').innerText = t.btnWa;
   document.getElementById('btnCv').innerText = t.btnCv;
 
-  // Yetenekler Listesi Güncellemesi
   const skillsContainer = document.getElementById('skillsContainer');
   skillsContainer.innerHTML = '';
   t.skills.forEach(skill => {
@@ -483,7 +476,6 @@ function setLang(lang){
   });
 }
 
-// Sayfa yüklendiğinde varsayılan dil olarak Türkçe ayarla
 window.onload = () => {
   setLang('tr');
 };
