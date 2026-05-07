@@ -44,6 +44,19 @@
       overflow-x: hidden;
     }
 
+    /* Arapça için sağdan sola okuma uyumluluğu */
+    html[dir="rtl"] body {
+      text-align: right;
+    }
+    
+    html[dir="rtl"] .hero-top {
+      flex-direction: row-reverse;
+    }
+
+    html[dir="rtl"] .buttons {
+      justify-content: flex-end;
+    }
+
     .glow {
       position: fixed;
       width: 500px;
@@ -66,12 +79,8 @@
     }
 
     @keyframes float {
-      from {
-        transform: translateY(0px);
-      }
-      to {
-        transform: translateY(40px);
-      }
+      from { transform: translateY(0px); }
+      to { transform: translateY(40px); }
     }
 
     .container {
@@ -84,6 +93,10 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 25px;
+    }
+
+    html[dir="rtl"] .topbar {
+      flex-direction: row-reverse;
     }
 
     .brand {
@@ -113,14 +126,8 @@
     }
 
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0px);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0px); }
     }
 
     .hero-top {
@@ -133,7 +140,7 @@
     .profile {
       width: 160px;
       height: 160px;
-      border-radius: 30px;
+      border-radius: 50%; /* Kenarları tam yuvarlak yapıldı */
       object-fit: cover;
       border: 2px solid rgba(255,255,255,0.15);
       box-shadow: 0 0 30px rgba(0,240,255,0.25);
@@ -171,6 +178,7 @@
       color: var(--text);
       border: 1px solid var(--border);
       transition: 0.3s ease;
+      cursor: pointer;
     }
 
     .btn:hover {
@@ -181,7 +189,7 @@
     .grid {
       margin-top: 30px;
       display: grid;
-      grid-template-columns: repeat(2,minmax(0,1fr));
+      grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
       gap: 20px;
     }
 
@@ -218,6 +226,23 @@
       color: #00ff95;
       line-height: 1.8;
       overflow-x: auto;
+      direction: ltr; /* Terminal her zaman soldan sağa kalır */
+      text-align: left;
+    }
+
+    /* Terminal yanıp sönme efekti */
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 1em;
+      background-color: #00ff95;
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
 
     .qr {
@@ -233,34 +258,16 @@
       font-size: 14px;
     }
 
-    @media(max-width: 900px){
-      .grid {
-        grid-template-columns: 1fr;
-      }
+    /* Gizli öğeler sınıfı */
+    .hidden {
+      display: none !important;
     }
 
     @media(max-width: 768px){
-      .hero {
-        padding: 30px;
-      }
-
-      .hero-top {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      h1 {
-        font-size: 38px;
-      }
-
-      .buttons {
-        justify-content: center;
-      }
-    }
-
-      h1 {
-        font-size: 38px;
-      }
+      .hero { padding: 30px; }
+      h1 { font-size: 38px; }
+      .hero-top { justify-content: center; text-align: center; }
+      html[dir="rtl"] .buttons { justify-content: center; }
     }
   </style>
 </head>
@@ -273,126 +280,87 @@
 
   <div class="topbar">
     <div class="brand">İBRAHİM YÜZER</div>
-
-    <button class="toggle" onclick="toggleTheme()">
-      🌙 / ☀️
-    </button>
+    <button class="toggle" onclick="toggleTheme()">🌙 / ☀️</button>
   </div>
 
   <section class="hero">
-
     <div class="hero-top">
-
-      <img src="profil.jpg" class="profile" style="border-radius:50%;">
+      <img src="profil.jpg" class="profile" alt="Profil">
 
       <div>
         <h1 id="name">İbrahim Yüzer</h1>
-
         <div class="subtitle" id="title">
-          Türkçe Eğitmeni • Content Creator • Digital Projects
+          Türkçe Eğitmeni • Çevirmen • Tasarımcı
         </div>
 
         <p class="description" id="desc">
-          Endonezya’da Türkçe eğitimi, dijital içerik üretimi ve modern medya projeleri üzerine çalışmalar yapıyorum.
-          Eğitim ile teknolojiyi bir araya getirerek sade ama etkili sistemler geliştirmeyi seviyorum.
+          Endonezya’da Türkçe eğitimi veriyor, Arapça tercümanlık yapıyor ve grafik tasarım (e-kitap, broşür, afiş) süreçlerini yürütüyorum. Eğitim tecrübemi; yazılım geliştirme ve dijital projelerle birleştirerek modern çözümler üretiyorum.
         </p>
 
         <div class="buttons">
-
-          <a class="btn" href="https://wa.me/620000000000" target="_blank">
+          <a class="btn" href="https://wa.me/905469347321" target="_blank" id="btnWa">
             WhatsApp
           </a>
-
-          <!-- CV BUTONU ŞİMDİLİK GİZLİ -->
-
-          <!--
-          <a class="btn" href="cv.pdf" download>
+          
+          <!-- İleride kullanmak için CV indirme butonu, şu an gizli -->
+          <a class="btn hidden" href="cv.pdf" download id="btnCv">
             CV Download
           </a>
-          -->
 
-          <a class="btn" href="#" onclick="setLang('tr')">
-            Türkçe
-          </a>
-
-          <a class="btn" href="#" onclick="setLang('en')">
-            English
-          </a>
-
-          <a class="btn" href="#" onclick="setLang('id')">
-            Indonesia
-          </a>
-
-          <a class="btn" href="#" onclick="setLang('ar')">
-            العربية
-          </a>
-
+          <a class="btn" onclick="setLang('tr')">TR</a>
+          <a class="btn" onclick="setLang('en')">EN</a>
+          <a class="btn" onclick="setLang('ar')">AR</a>
+          <a class="btn" onclick="setLang('id')">ID</a>
         </div>
       </div>
     </div>
 
     <div class="grid">
-
       <div class="card">
-        <h2 id="skillsTitle">Skills</h2>
-
-        <div class="skills">
-          <div class="skill">Türkçe Eğitimi</div>
-          <div class="skill">Arapça Tercümanlık</div>
-          <div class="skill">Bahasa Indonesia</div>
-          <div class="skill">Öğretmenlik</div>
-          <div class="skill">E-Book Tasarımı</div>
-          <div class="skill">Broşür Tasarımı</div>
-          <div class="skill">Afiş & Branda Tasarımı</div>
-          <div class="skill">YouTube İçerikleri</div>
-          <div class="skill">Canva & CapCut</div>
-          <div class="skill">Sosyal Medya</div>
-          <div class="skill">Dijital İçerik Üretimi</div>
-          <div class="skill">AI Araçları</div>
+        <h2 id="skillsTitle">Yetenekler</h2>
+        <div class="skills" id="skillsContainer">
+          <!-- Yetenekler JavaScript ile doldurulacak -->
         </div>
       </div>
-      </div>
 
       <div class="card">
-        <h2 id="contactTitle">Contact</h2>
-
-        <p id="phoneText">📞 Phone: +90 546 934 73 21</p>
+        <h2 id="contactTitle">İletişim</h2>
+        <p>📞 +90 546 934 73 21</p>
         <br>
-        <p id="mailText">✉️ Mail: ibrahimyuzer@outlook.com</p>
-        <br>
-        <p id="instagramText">📷 Instagram: hidden</p>
-        <br>
-        <p id="youtubeText">▶️ YouTube: hidden</p>
-        <br>
-        <p id="tiktokText">🎵 TikTok: hidden</p>
-        <br>
-        <p id="facebookText">📘 Facebook: hidden</p>
-        <br>
-        <p>▶️ youtube.com/@kanal</p>
+        <p>✉️ ibrahimyuzer@outlook.com</p>
+        
+        <!-- Sosyal medya hesapları ilerisi için eklendi, şu an gizli (hidden sınıfı ile) -->
+        <div class="hidden">
+          <br>
+          <p>📷 instagram.com/kullaniciadi</p>
+          <p>▶️ youtube.com/@kanal</p>
+          <p>📘 facebook.com/kullaniciadi</p>
+          <p>🎵 tiktok.com/@kullaniciadi</p>
+        </div>
       </div>
 
       <div class="card">
         <h2 id="terminalTitle">Terminal</h2>
-
-        <div class="terminal" id="terminal">
-          > initializing portfolio...<br>
+        <div class="terminal">
+          <span id="term1">> initializing portfolio...</span><br>
+          <span id="term2">> loading projects...</span><br>
+          <span id="term3">> connecting creative systems...</span><br>
+          <span id="term4">> status: online</span><br>
+          <span id="term5">> welcome visitor</span><span class="cursor"></span>
         </div>
       </div>
 
       <div class="card">
-        <h2 id="qrTitle">QR Card</h2>
-
+        <h2 id="qrTitle">QR Kart</h2>
         <p id="qrDesc">
-          QR kodunu telefonla okutarak direkt iletişime geçilebilir.
+          QR kodunu telefonla okutarak direkt iletişime geçebilirsiniz.
         </p>
-
-        <img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://github.com" alt="QR">
+        <img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://wa.me/905469347321" alt="QR">
       </div>
-
     </div>
 
     <div class="footer">
-      Visitor Count: <span id="counter">1024</span>
+      <span id="footerText">Visitor Count:</span> <span id="counter">1024</span>
       <br><br>
       © 2026 İbrahim Yüzer
     </div>
@@ -401,88 +369,124 @@
 </div>
 
 <script>
-
 function toggleTheme(){
   document.body.classList.toggle('light');
 }
 
+// Çoklu Dil Altyapısı
+const translations = {
+  tr: {
+    title: "Türkçe Eğitmeni • Çevirmen • Tasarımcı",
+    desc: "Endonezya’da Türkçe eğitimi veriyor, Arapça tercümanlık yapıyor ve grafik tasarım (e-kitap, broşür, afiş, branda) süreçlerini yürütüyorum. Eğitim tecrübemi; yazılım geliştirme (React, Kotlin) ve ticaret botları gibi dijital projelerle birleştirerek modern çözümler üretiyorum.",
+    skillsTitle: "Yetenekler",
+    skills: ["Türkçe Öğretmenliği", "Arapça Tercümanlık", "Endonezce", "Grafik Tasarım (E-kitap, Broşür)", "Branda & Afiş Tasarımı", "Yazılım Geliştirme", "Ticaret Botları", "Eğitim Yönetimi"],
+    contactTitle: "İletişim",
+    terminalTitle: "Sistem Terminali",
+    term1: "> portfolyo başlatılıyor...",
+    term2: "> projeler yükleniyor...",
+    term3: "> yaratıcı sistemler bağlanıyor...",
+    term4: "> durum: çevrimiçi",
+    term5: "> hoş geldin ziyaretçi",
+    qrTitle: "QR Kart",
+    qrDesc: "QR kodunu telefonla okutarak direkt iletişime geçebilirsiniz.",
+    footerText: "Ziyaretçi Sayısı:",
+    btnWa: "WhatsApp'tan Ulaş",
+    btnCv: "CV İndir"
+  },
+  en: {
+    title: "Turkish Teacher • Translator • Designer",
+    desc: "I teach Turkish, work as an Arabic translator, and handle graphic design (e-books, brochures, posters) in Indonesia. I combine my educational background with software development (React, Kotlin) and digital projects like trading bots to create modern solutions.",
+    skillsTitle: "Skills",
+    skills: ["Turkish Teaching", "Arabic Translation", "Indonesian Language", "Graphic Design (E-book, Brochure)", "Banner & Poster Design", "Software Development", "Trading Bots", "Education Management"],
+    contactTitle: "Contact",
+    terminalTitle: "System Terminal",
+    term1: "> initializing portfolio...",
+    term2: "> loading projects...",
+    term3: "> connecting creative systems...",
+    term4: "> status: online",
+    term5: "> welcome visitor",
+    qrTitle: "QR Card",
+    qrDesc: "Scan the QR code with your phone to get in touch directly.",
+    footerText: "Visitor Count:",
+    btnWa: "Contact on WhatsApp",
+    btnCv: "Download CV"
+  },
+  ar: {
+    title: "مدرس لغة تركية • مترجم • مصمم",
+    desc: "أقوم بتدريس اللغة التركية، وأعمل كمترجم للغة العربية، وأدير أعمال التصميم الجرافيكي (الكتب الإلكترونية، الكتيبات، الملصقات) في إندونيسيا. أجمع بين خبرتي التعليمية وتطوير البرمجيات والمشاريع الرقمية لإنتاج حلول حديثة.",
+    skillsTitle: "المهارات",
+    skills: ["تعليم اللغة التركية", "الترجمة العربية", "اللغة الإندونيسية", "تصميم الجرافيك", "تصميم الملصقات واللافتات", "تطوير البرمجيات", "روبوتات التداول", "الإدارة التعليمية"],
+    contactTitle: "اتصال",
+    terminalTitle: "محطة النظام",
+    term1: "> جاري تهيئة المحفظة...",
+    term2: "> جاري تحميل المشاريع...",
+    term3: "> جاري توصيل الأنظمة الإبداعية...",
+    term4: "> الحالة: متصل",
+    term5: "> أهلاً بك أيها الزائر",
+    qrTitle: "بطاقة QR",
+    qrDesc: "امسح رمز الاستجابة السريعة بهاتفك للتواصل مباشرة.",
+    footerText: "عدد الزوار:",
+    btnWa: "تواصل عبر واتساب",
+    btnCv: "تحميل السيرة الذاتية"
+  },
+  id: {
+    title: "Guru Bahasa Turki • Penerjemah • Desainer",
+    desc: "Saya mengajar bahasa Turki, bekerja sebagai penerjemah bahasa Arab, dan menangani desain grafis (e-book, brosur, poster, spanduk) di Indonesia. Saya menggabungkan pengalaman pendidikan saya dengan pengembangan perangkat lunak (React, Kotlin) dan proyek digital untuk menciptakan solusi modern.",
+    skillsTitle: "Keahlian",
+    skills: ["Mengajar Bahasa Turki", "Penerjemah Bahasa Arab", "Bahasa Indonesia", "Desain Grafis (E-book, Brosur)", "Desain Spanduk & Poster", "Pengembangan Perangkat Lunak", "Bot Trading", "Manajemen Pendidikan"],
+    contactTitle: "Kontak",
+    terminalTitle: "Terminal Sistem",
+    term1: "> menginisialisasi portofolio...",
+    term2: "> memuat proyek...",
+    term3: "> menghubungkan sistem kreatif...",
+    term4: "> status: online",
+    term5: "> selamat datang pengunjung",
+    qrTitle: "Kartu QR",
+    qrDesc: "Pindai kode QR dengan ponsel Anda untuk menghubungi secara langsung.",
+    footerText: "Jumlah Pengunjung:",
+    btnWa: "Hubungi via WhatsApp",
+    btnCv: "Unduh CV"
+  }
+};
+
 function setLang(lang){
+  // Sayfa yönünü Arapça için ayarla
+  document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
 
-  if(lang === 'tr'){
-    document.getElementById('title').innerHTML = 'Türkçe Eğitmeni • İçerik Üreticisi • Dijital Projeler';
-    document.getElementById('desc').innerHTML = 'Endonezya’da Türkçe eğitimi, dijital içerik üretimi ve modern medya projeleri üzerine çalışmalar yapıyorum.';
-    document.getElementById('skillsTitle').innerHTML = 'Yetenekler';
-    document.getElementById('contactTitle').innerHTML = 'İletişim';
-    document.getElementById('terminalTitle').innerHTML = 'Terminal';
-    document.getElementById('qrTitle').innerHTML = 'QR Kart';
-    document.getElementById('phoneText').innerHTML = '📞 Telefon: +90 546 934 73 21';
-    document.getElementById('mailText').innerHTML = '✉️ Mail: ibrahimyuzer@outlook.com';
-    document.getElementById('instagramText').innerHTML = '📷 Instagram: hidden';
-    document.getElementById('youtubeText').innerHTML = '▶️ YouTube: hidden';
-    document.getElementById('tiktokText').innerHTML = '🎵 TikTok: hidden';
-    document.getElementById('facebookText').innerHTML = '📘 Facebook: hidden';
-    document.getElementById('qrDesc').innerHTML = 'QR kodunu telefonla okutarak direkt iletişime geçilebilir.';
-  }
+  const t = translations[lang];
 
-  if(lang === 'en'){
-    document.getElementById('title').innerHTML = 'Turkish Teacher • Content Creator • Digital Projects';
-    document.getElementById('desc').innerHTML = 'I work on Turkish language education, digital content production and modern media projects in Indonesia.';
-    document.getElementById('skillsTitle').innerHTML = 'Skills';
-    document.getElementById('contactTitle').innerHTML = 'Contact';
-    document.getElementById('terminalTitle').innerHTML = 'Terminal';
-    document.getElementById('qrTitle').innerHTML = 'QR Card';
-    document.getElementById('phoneText').innerHTML = '📞 Phone: +90 546 934 73 21';
-    document.getElementById('mailText').innerHTML = '✉️ Mail: ibrahimyuzer@outlook.com';
-    document.getElementById('instagramText').innerHTML = '📷 Instagram: hidden';
-    document.getElementById('youtubeText').innerHTML = '▶️ YouTube: hidden';
-    document.getElementById('tiktokText').innerHTML = '🎵 TikTok: hidden';
-    document.getElementById('facebookText').innerHTML = '📘 Facebook: hidden';
-    document.getElementById('qrDesc').innerHTML = 'Scan the QR code to contact directly.';
-  }
+  // Metin Güncellemeleri
+  document.getElementById('title').innerText = t.title;
+  document.getElementById('desc').innerText = t.desc;
+  document.getElementById('skillsTitle').innerText = t.skillsTitle;
+  document.getElementById('contactTitle').innerText = t.contactTitle;
+  document.getElementById('terminalTitle').innerText = t.terminalTitle;
+  document.getElementById('term1').innerText = t.term1;
+  document.getElementById('term2').innerText = t.term2;
+  document.getElementById('term3').innerText = t.term3;
+  document.getElementById('term4').innerText = t.term4;
+  document.getElementById('term5').innerText = t.term5;
+  document.getElementById('qrTitle').innerText = t.qrTitle;
+  document.getElementById('qrDesc').innerText = t.qrDesc;
+  document.getElementById('footerText').innerText = t.footerText;
+  document.getElementById('btnWa').innerText = t.btnWa;
+  document.getElementById('btnCv').innerText = t.btnCv;
 
-  if(lang === 'id'){
-    document.getElementById('title').innerHTML = 'Pengajar Bahasa Turki • Kreator Konten • Proyek Digital';
-    document.getElementById('desc').innerHTML = 'Saya bekerja di bidang pendidikan bahasa Turki dan produksi konten digital di Indonesia.';
-    document.getElementById('skillsTitle').innerHTML = 'Keahlian';
-    document.getElementById('contactTitle').innerHTML = 'Kontak';
-    document.getElementById('terminalTitle').innerHTML = 'Terminal';
-    document.getElementById('qrTitle').innerHTML = 'Kartu QR';
-    document.getElementById('phoneText').innerHTML = '📞 Telepon: +90 546 934 73 21';
-    document.getElementById('mailText').innerHTML = '✉️ Email: ibrahimyuzer@outlook.com';
-    document.getElementById('instagramText').innerHTML = '📷 Instagram: hidden';
-    document.getElementById('youtubeText').innerHTML = '▶️ YouTube: hidden';
-    document.getElementById('tiktokText').innerHTML = '🎵 TikTok: hidden';
-    document.getElementById('facebookText').innerHTML = '📘 Facebook: hidden';
-    document.getElementById('qrDesc').innerHTML = 'Scan QR untuk menghubungi langsung.';
-  }
-
-  if(lang === 'ar'){
-    document.getElementById('title').innerHTML = 'مدرس اللغة التركية • صانع محتوى • مشاريع رقمية';
-    document.getElementById('desc').innerHTML = 'أعمل في تعليم اللغة التركية وإنتاج المحتوى الرقمي في إندونيسيا.';
-    document.getElementById('skillsTitle').innerHTML = 'المهارات';
-    document.getElementById('contactTitle').innerHTML = 'التواصل';
-    document.getElementById('terminalTitle').innerHTML = 'الطرفية';
-    document.getElementById('qrTitle').innerHTML = 'رمز QR';
-    document.getElementById('phoneText').innerHTML = '📞 الهاتف: +90 546 934 73 21';
-    document.getElementById('mailText').innerHTML = '✉️ البريد: ibrahimyuzer@outlook.com';
-    document.getElementById('instagramText').innerHTML = '📷 إنستغرام: hidden';
-    document.getElementById('youtubeText').innerHTML = '▶️ يوتيوب: hidden';
-    document.getElementById('tiktokText').innerHTML = '🎵 تيك توك: hidden';
-    document.getElementById('facebookText').innerHTML = '📘 فيسبوك: hidden';
-    document.getElementById('qrDesc').innerHTML = 'قم بمسح رمز QR للتواصل مباشرة.';
-  }
+  // Yetenekler Listesi Güncellemesi
+  const skillsContainer = document.getElementById('skillsContainer');
+  skillsContainer.innerHTML = '';
+  t.skills.forEach(skill => {
+    const div = document.createElement('div');
+    div.className = 'skill';
+    div.innerText = skill;
+    skillsContainer.appendChild(div);
+  });
 }
 
-const lines = [
-      i = 0;
-      typeTerminal();
-    },2000);
-  }
-}
-
-terminal.innerHTML = '';
-typeTerminal();
-
+// Sayfa yüklendiğinde varsayılan dil olarak Türkçe ayarla
+window.onload = () => {
+  setLang('tr');
+};
 </script>
 
 </body>
