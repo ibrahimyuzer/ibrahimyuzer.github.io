@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolyo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Amiri:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --surface2: #1c2333;
+      --gold: #c9a84c;
+      --gold-light: #e6c97a;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --border: #30363d;
+      --accent: #c9a84c;
+      --radius: 10px;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+    }
+    body[dir="rtl"] { font-family: 'Amiri', 'Inter', sans-serif; }
+
+    /* NAV */
+    nav {
+      position: fixed; top:0; left:0; right:0; z-index:100;
+      background: rgba(13,17,23,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items:center; justify-content:space-between;
+      padding: 0 5%;
+      height: 60px;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+    .nav-links { display:flex; gap:1.5rem; align-items:center; flex-wrap:wrap; }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration:none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* LANG SWITCHER */
+    .lang-switcher { display:flex; gap:0.4rem; }
+    .lang-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 3px 9px;
+      border-radius: 5px;
+      cursor:pointer;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .lang-btn.active, .lang-btn:hover {
+      background: var(--gold);
+      color: #0d1117;
+      border-color: var(--gold);
+    }
+
+    /* SECTIONS */
+    section { padding: 90px 10%; }
+    section:first-of-type { padding-top: 140px; }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction:column; justify-content:center;
+      padding-top: 120px;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content:'';
+      position:absolute; top:-200px; right:-200px;
+      width:600px; height:600px;
+      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+      pointer-events:none;
+    }
+    .hero-label {
+      font-size:0.8rem; font-weight:600; letter-spacing:3px;
+      color: var(--gold); text-transform:uppercase; margin-bottom:1rem;
+    }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+    .hero-name span { color: var(--gold); }
+    .hero-tagline {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--text-muted);
+      max-width: 550px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+    .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; }
+    .btn {
+      padding: 11px 26px; border-radius: var(--radius);
+      font-weight: 600; font-size:0.9rem;
+      cursor:pointer; text-decoration:none;
+      transition: all 0.2s; display:inline-block;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: #0d1117;
+      border: 2px solid var(--gold);
+    }
+    .btn-primary:hover { background: var(--gold-light); border-color: var(--gold-light); }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 2px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* SECTION HEADER */
+    .section-header { margin-bottom: 3rem; }
+    .section-eyebrow {
+      font-size:0.75rem; font-weight:700; letter-spacing:3px;
+      text-transform:uppercase; color: var(--gold); margin-bottom:0.6rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700;
+    }
+    .section-divider {
+      width: 50px; height: 3px;
+      background: var(--gold);
+      margin: 0.8rem 0 0;
+      border-radius: 2px;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .about-text { font-size:1rem; color: var(--text-muted); line-height:1.9; }
+    .about-text p { margin-bottom: 1rem; }
+    .info-cards { display:flex; flex-direction:column; gap:1rem; }
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.4rem;
+    }
+    .info-card-label {
+      font-size:0.7rem; font-weight:700; letter-spacing:2px;
+      text-transform:uppercase; color:var(--gold); margin-bottom:0.4rem;
+    }
+    .info-card-value { font-size:0.95rem; font-weight:500; }
+
+    /* LANGUAGES */
+    .lang-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:1.2rem; }
+    .lang-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .lang-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+    .lang-flag { font-size:2rem; margin-bottom:0.6rem; }
+    .lang-name { font-weight:700; font-size:1rem; margin-bottom:0.3rem; }
+    .lang-level {
+      font-size:0.78rem; color:var(--text-muted);
+      margin-bottom:0.8rem;
+    }
+    .lang-bar-bg {
+      height:4px; background:var(--border); border-radius:2px;
+    }
+    .lang-bar-fill {
+      height:4px; background:var(--gold); border-radius:2px;
+      transition: width 1s ease;
+    }
+    .learning-badge {
+      display:inline-block;
+      background: rgba(201,168,76,0.15);
+      color:var(--gold); font-size:0.7rem;
+      padding:2px 8px; border-radius:20px;
+      font-weight:600; margin-top:0.5rem;
+    }
+
+    /* SKILLS */
+    .skills-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap:1.5rem; }
+    .skill-group {
+      background: var(--surface);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+    .skill-group-icon { font-size:1.5rem; margin-bottom:0.7rem; }
+    .skill-group-title { font-weight:700; margin-bottom:0.9rem; font-size:1rem; }
+    .skill-tags { display:flex; flex-wrap:wrap; gap:0.5rem; }
+    .skill-tag {
+      background: var(--surface2);
+      border:1px solid var(--border);
+      border-radius:5px;
+      padding:3px 10px;
+      font-size:0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* EXPERIENCE */
+    .exp-list { display:flex; flex-direction:column; gap:1.5rem; }
+    .exp-card {
+      background: var(--surface);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      padding:1.6rem;
+      transition: border-color 0.2s;
+    }
+    .exp-card:hover { border-color:var(--gold); }
+    .exp-header { display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; }
+    .exp-title { font-weight:700; font-size:1rem; }
+    .exp-org { color:var(--gold); font-size:0.9rem; font-weight:600; margin-bottom:0.2rem; }
+    .exp-period { font-size:0.78rem; color:var(--text-muted); background:var(--surface2); padding:3px 10px; border-radius:5px; white-space:nowrap; }
+    .exp-desc { margin-top:0.8rem; font-size:0.9rem; color:var(--text-muted); line-height:1.8; }
+
+    /* CONTACT */
+    #contact { background: var(--surface); }
+    .contact-grid { display:grid; grid-template-columns: 1fr 1fr; gap:3rem; align-items:start; }
+    .contact-intro { color:var(--text-muted); margin-bottom:1.5rem; line-height:1.9; }
+    .contact-links { display:flex; flex-direction:column; gap:0.8rem; }
+    .contact-link {
+      display:flex; align-items:center; gap:0.8rem;
+      color:var(--text-muted); text-decoration:none;
+      font-size:0.9rem;
+      transition:color 0.2s;
+    }
+    .contact-link:hover { color:var(--gold); }
+    .contact-link-icon {
+      width:36px; height:36px;
+      background:var(--surface2); border:1px solid var(--border);
+      border-radius:8px; display:flex; align-items:center; justify-content:center;
+      font-size:1rem; flex-shrink:0;
+    }
+
+    /* SOCIAL TOGGLE */
+    .social-section { margin-top:2rem; }
+    .social-toggle-btn {
+      background:transparent; border:1px dashed var(--border);
+      color:var(--text-muted); padding:7px 16px; border-radius:6px;
+      cursor:pointer; font-size:0.82rem; transition:all 0.2s; margin-bottom:1rem;
+    }
+    .social-toggle-btn:hover { border-color:var(--gold); color:var(--gold); }
+    .social-links {
+      display:flex; flex-wrap:wrap; gap:0.8rem;
+      transition: all 0.3s;
+    }
+    .social-link {
+      display:flex; align-items:center; gap:0.5rem;
+      background:var(--surface2); border:1px solid var(--border);
+      color:var(--text-muted); text-decoration:none;
+      padding:7px 14px; border-radius:8px; font-size:0.85rem;
+      transition: all 0.2s;
+    }
+    .social-link:hover { border-color:var(--gold); color:var(--gold); }
+
+    /* FOOTER */
+    footer {
+      text-align:center; padding:2rem; font-size:0.8rem;
+      color:var(--text-muted); border-top:1px solid var(--border);
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:768px) {
+      section { padding: 70px 6%; }
+      .about-grid, .contact-grid { grid-template-columns:1fr; }
+      nav { padding:0 4%; }
+      .nav-links { gap:0.8rem; }
+    }
+    @media(max-width:480px){
+      .nav-links a { display:none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo" data-i18n="nav_logo">AK</div>
+  <div class="nav-links">
+    <a href="#about" data-i18n="nav_about">Hakkımda</a>
+    <a href="#languages" data-i18n="nav_langs">Diller</a>
+    <a href="#skills" data-i18n="nav_skills">Beceriler</a>
+    <a href="#experience" data-i18n="nav_exp">Deneyim</a>
+    <a href="#contact" data-i18n="nav_contact">İletişim</a>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('tr')">TR</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('id')">ID</button>
+      <button class="lang-btn" onclick="setLang('ar')">AR</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-label" data-i18n="hero_label">Eğitim · Tasarım · Dil</div>
+  <h1 class="hero-name" data-i18n="hero_name">Merhaba, ben<br><span>[Adınız]</span></h1>
+  <p class="hero-tagline" data-i18n="hero_tagline">
+    Türkçe öğretmeni, grafik tasarımcı ve çok dilli iletişim uzmanı. Endonezya'dan dünyaya köprüler kuruyorum.
+  </p>
+  <div class="hero-btns">
+    <a href="#contact" class="btn btn-primary" data-i18n="hero_cta1">İletişime Geç</a>
+    <a href="#about" class="btn btn-outline" data-i18n="hero_cta2">Daha Fazla</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <div class="section-eyebrow" data-i18n="about_eyebrow">Kimim</div>
+    <h2 class="section-title" data-i18n="about_title">Hakkımda</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text" data-i18n="about_text">
+      <p>Sınıf öğretmenliği mezunuyum ve 4 yıldır Endonezya'da Türkçe öğretiyorum. Eğitimin yanı sıra grafik tasarım alanında da aktif olarak çalışıyorum; Adobe Illustrator, Photoshop ve InDesign ile broşür, kitap ve sosyal medya tasarımları üretiyorum.</p>
+      <p>Daha önce bir yardım kuruluşunda 4 yıl görev yaptım. Bu süreçte Arapçalarıyla çeşitli kuruluşlarla yazışmalar yürüttüm, raporlamaları takip ettim ve kurumun Arapça sosyal medya hesaplarını yönettim.</p>
+      <p>Şu an Çince öğreniyor; Flutter ve Python ile yazılım geliştirme becerilerimi geliştirmeyi hedefliyorum. Önceden HTML/CSS ile çalıştım, az miktarda Python deneyimim var.</p>
+    </div>
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="info-card-label" data-i18n="info_location_label">Konum</div>
+        <div class="info-card-value" data-i18n="info_location_val">Endonezya 🇮🇩</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label" data-i18n="info_edu_label">Eğitim</div>
+        <div class="info-card-value" data-i18n="info_edu_val">Sınıf Öğretmenliği Mezunu</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label" data-i18n="info_role_label">Roller</div>
+        <div class="info-card-value" data-i18n="info_role_val">Türkçe Öğretmeni · Grafik Tasarımcı</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label" data-i18n="info_interest_label">Öğreniyor</div>
+        <div class="info-card-value" data-i18n="info_interest_val">Çince 🇨🇳 · Flutter · Python</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section id="languages" style="background: var(--surface);">
+  <div class="section-header">
+    <div class="section-eyebrow" data-i18n="lang_eyebrow">Çok Dilli</div>
+    <h2 class="section-title" data-i18n="lang_title">Diller</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="lang-grid">
+    <div class="lang-card">
+      <div class="lang-flag">🇹🇷</div>
+      <div class="lang-name" data-i18n="lang_tr">Türkçe</div>
+      <div class="lang-level" data-i18n="lang_tr_level">Anadil</div>
+      <div class="lang-bar-bg"><div class="lang-bar-fill" style="width:100%"></div></div>
+    </div>
+    <div class="lang-card">
+      <div class="lang-flag">🇸🇦</div>
+      <div class="lang-name" data-i18n="lang_ar">Arapça</div>
+      <div class="lang-level" data-i18n="lang_ar_level">İleri Düzey · Profesyonel</div>
+      <div class="lang-bar-bg"><div class="lang-bar-fill" style="width:90%"></div></div>
+    </div>
+    <div class="lang-card">
+      <div class="lang-flag">🇮🇩</div>
+      <div class="lang-name" data-i18n="lang_id">Endonezce</div>
+      <div class="lang-level" data-i18n="lang_id_level">İleri Düzey · 4 Yıl</div>
+      <div class="lang-bar-bg"><div class="lang-bar-fill" style="width:85%"></div></div>
+    </div>
+    <div class="lang-card">
+      <div class="lang-flag">🇬🇧</div>
+      <div class="lang-name" data-i18n="lang_en">İngilizce</div>
+      <div class="lang-level" data-i18n="lang_en_level">İyi Düzey</div>
+      <div class="lang-bar-bg"><div class="lang-bar-fill" style="width:70%"></div></div>
+    </div>
+    <div class="lang-card" style="border-style:dashed;">
+      <div class="lang-flag">🇨🇳</div>
+      <div class="lang-name" data-i18n="lang_zh">Çince</div>
+      <div class="lang-level" data-i18n="lang_zh_level">Öğreniliyor...</div>
+      <div class="lang-bar-bg"><div class="lang-bar-fill" style="width:10%"></div></div>
+      <span class="learning-badge" data-i18n="lang_learning">Öğrenme Yolculuğu</span>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <div class="section-eyebrow" data-i18n="skills_eyebrow">Uzmanlık</div>
+    <h2 class="section-title" data-i18n="skills_title">Beceriler</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-icon">🎨</div>
+      <div class="skill-group-title" data-i18n="skill_design_title">Grafik Tasarım</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Adobe Illustrator</span>
+        <span class="skill-tag">Photoshop</span>
+        <span class="skill-tag">InDesign</span>
+        <span class="skill-tag" data-i18n="skill_brochure">Broşür Tasarımı</span>
+        <span class="skill-tag" data-i18n="skill_book">Kitap Tasarımı</span>
+        <span class="skill-tag" data-i18n="skill_social">Sosyal Medya Tasarımı</span>
+        <span class="skill-tag">RTL Tasarım (Arapça)</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-icon">📚</div>
+      <div class="skill-group-title" data-i18n="skill_edu_title">Eğitim</div>
+      <div class="skill-tags">
+        <span class="skill-tag" data-i18n="skill_teach_tr">Türkçe Öğretimi (Yabancı Dil)</span>
+        <span class="skill-tag" data-i18n="skill_primary">Sınıf Öğretmenliği</span>
+        <span class="skill-tag" data-i18n="skill_curriculum">Müfredat Geliştirme</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-icon">🌍</div>
+      <div class="skill-group-title" data-i18n="skill_comm_title">İletişim & Koordinasyon</div>
+      <div class="skill-tags">
+        <span class="skill-tag" data-i18n="skill_ar_social">Arapça Sosyal Medya Yönetimi</span>
+        <span class="skill-tag" data-i18n="skill_ngo">STK İletişimi</span>
+        <span class="skill-tag" data-i18n="skill_reporting">Raporlama</span>
+        <span class="skill-tag" data-i18n="skill_translation">Çeviri & Yerelleştirme</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-icon">💻</div>
+      <div class="skill-group-title" data-i18n="skill_tech_title">Teknoloji</div>
+      <div class="skill-tags">
+        <span class="skill-tag">HTML / CSS</span>
+        <span class="skill-tag">Python (Temel)</span>
+        <span class="skill-tag" data-i18n="skill_flutter_l">Flutter (Öğreniyor)</span>
+        <span class="skill-tag" data-i18n="skill_python_l">Python (Geliştiriyor)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="background:var(--surface);">
+  <div class="section-header">
+    <div class="section-eyebrow" data-i18n="exp_eyebrow">Kariyer</div>
+    <h2 class="section-title" data-i18n="exp_title">Deneyim</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="exp-list">
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-org" data-i18n="exp1_org">Endonezya · Türkçe Öğretmeni</div>
+          <div class="exp-title" data-i18n="exp1_title">Türkçe Dil Eğitimi</div>
+        </div>
+        <div class="exp-period" data-i18n="exp1_period">2020 – Günümüz</div>
+      </div>
+      <div class="exp-desc" data-i18n="exp1_desc">
+        Endonezya'da Türkçeyi yabancı dil olarak öğretiyorum. Ders materyalleri geliştiriyor, öğrencilerin dil becerilerini ölçüyor ve kültürlerarası iletişimi güçlendiriyorum.
+      </div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-org" data-i18n="exp2_org">Yardım Kuruluşu</div>
+          <div class="exp-title" data-i18n="exp2_title">Grafik Tasarım & Arapça İletişim Uzmanı</div>
+        </div>
+        <div class="exp-period" data-i18n="exp2_period">4 Yıl</div>
+      </div>
+      <div class="exp-desc" data-i18n="exp2_desc">
+        Kurumun görsel kimliğini oluşturacak tasarımlar ürettim; broşür, rapor ve sosyal medya görselleri hazırladım. Arapça konuşan partner kuruluşlarla yazışmaları yürüttüm, raporlamaları takip ettim ve Arapça sosyal medya hesaplarını yönettim. Tasarımları RTL (sağdan sola) formatına uyarladım.
+      </div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-org" data-i18n="exp3_org">Serbest Çalışma</div>
+          <div class="exp-title" data-i18n="exp3_title">Grafik Tasarımcı</div>
+        </div>
+        <div class="exp-period" data-i18n="exp3_period">Süregelen</div>
+      </div>
+      <div class="exp-desc" data-i18n="exp3_desc">
+        Adobe Illustrator, Photoshop ve InDesign kullanarak broşür, kitap kapağı, kurumsal kimlik ve sosyal medya içerikleri tasarlıyorum.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <div class="section-eyebrow" data-i18n="contact_eyebrow">Ulaşın</div>
+    <h2 class="section-title" data-i18n="contact_title">İletişim</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="contact-grid">
+    <div>
+      <p class="contact-intro" data-i18n="contact_intro">
+        Türkçe öğretimi, grafik tasarım projeleri veya işbirliği için benimle iletişime geçebilirsiniz. WhatsApp üzerinden de ulaşabilirsiniz.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:email@example.com" class="contact-link">
+          <div class="contact-link-icon">✉️</div>
+          <span data-i18n="contact_email">email@example.com</span>
+        </a>
+        <a href="https://wa.me/90XXXXXXXXXX" class="contact-link" target="_blank">
+          <div class="contact-link-icon">📱</div>
+          <span data-i18n="contact_wa">WhatsApp ile Yaz</span>
+        </a>
+      </div>
+
+      <!-- SOCIAL MEDIA -->
+      <div class="social-section">
+        <button class="social-toggle-btn" onclick="toggleSocial()" id="socialToggleBtn">
+          <span data-i18n="social_show">👁 Sosyal Medyayı Göster</span>
+        </button>
+        <div class="social-links" id="socialLinks" style="display:none;">
+          <a href="#" class="social-link" target="_blank">📸 <span>Instagram</span></a>
+          <a href="#" class="social-link" target="_blank">🐦 <span>Twitter / X</span></a>
+          <a href="#" class="social-link" target="_blank">💼 <span>LinkedIn</span></a>
+          <a href="#" class="social-link" target="_blank">📘 <span>Facebook</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius); padding:2rem;">
+      <div style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.5rem;" data-i18n="hizli_mesaj">Hızlı mesaj</div>
+      <div style="display:flex;flex-direction:column;gap:0.8rem;">
+        <input type="text" placeholder="Ad Soyad" style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:8px;font-size:0.9rem;outline:none;" id="msgName" data-i18n-placeholder="form_name"/>
+        <input type="email" placeholder="E-posta" style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:8px;font-size:0.9rem;outline:none;" id="msgEmail" data-i18n-placeholder="form_email"/>
+        <textarea rows="4" placeholder="Mesajınız..." style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:8px;font-size:0.9rem;outline:none;resize:vertical;" id="msgBody" data-i18n-placeholder="form_msg"></textarea>
+        <a id="sendMailBtn" href="#" onclick="sendMail(event)" class="btn btn-primary" style="text-align:center;" data-i18n="form_send">Mesaj Gönder</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span data-i18n="footer">© 2025 · Tasarım ile ❤️ yapıldı</span>
+</footer>
+
+<script>
+const translations = {
+  tr: {
+    dir: 'ltr',
+    nav_logo: 'AK',
+    nav_about: 'Hakkımda', nav_langs: 'Diller', nav_skills: 'Beceriler',
+    nav_exp: 'Deneyim', nav_contact: 'İletişim',
+    hero_label: 'Eğitim · Tasarım · Dil',
+    hero_name: 'Merhaba, ben<br><span>[Adınız]</span>',
+    hero_tagline: 'Türkçe öğretmeni, grafik tasarımcı ve çok dilli iletişim uzmanı. Endonezya\'dan dünyaya köprüler kuruyorum.',
+    hero_cta1: 'İletişime Geç', hero_cta2: 'Daha Fazla',
+    about_eyebrow: 'Kimim', about_title: 'Hakkımda',
+    about_text: '<p>Sınıf öğretmenliği mezunuyum ve 4 yıldır Endonezya\'da Türkçe öğretiyorum. Eğitimin yanı sıra grafik tasarım alanında da aktif olarak çalışıyorum; Adobe Illustrator, Photoshop ve InDesign ile broşür, kitap ve sosyal medya tasarımları üretiyorum.</p><p>Daha önce bir yardım kuruluşunda 4 yıl görev yaptım. Bu süreçte Arapça ile çeşitli kuruluşlarla yazışmalar yürüttüm, raporlamaları takip ettim ve kurumun Arapça sosyal medya hesaplarını yönettim.</p><p>Şu an Çince öğreniyor; Flutter ve Python ile yazılım geliştirme becerilerimi geliştirmeyi hedefliyorum.</p>',
+    info_location_label:'Konum', info_location_val:'Endonezya 🇮🇩',
+    info_edu_label:'Eğitim', info_edu_val:'Sınıf Öğretmenliği Mezunu',
+    info_role_label:'Roller', info_role_val:'Türkçe Öğretmeni · Grafik Tasarımcı',
+    info_interest_label:'Öğreniyor', info_interest_val:'Çince 🇨🇳 · Flutter · Python',
+    lang_eyebrow:'Çok Dilli', lang_title:'Diller',
+    lang_tr:'Türkçe', lang_tr_level:'Anadil',
+    lang_ar:'Arapça', lang_ar_level:'İleri Düzey · Profesyonel',
+    lang_id:'Endonezce', lang_id_level:'İleri Düzey · 4 Yıl',
+    lang_en:'İngilizce', lang_en_level:'İyi Düzey',
+    lang_zh:'Çince', lang_zh_level:'Öğreniliyor...', lang_learning:'Öğrenme Yolculuğu',
+    skills_eyebrow:'Uzmanlık', skills_title:'Beceriler',
+    skill_design_title:'Grafik Tasarım',
+    skill_brochure:'Broşür Tasarımı', skill_book:'Kitap Tasarımı', skill_social:'Sosyal Medya Tasarımı',
+    skill_edu_title:'Eğitim',
+    skill_teach_tr:'Türkçe Öğretimi (Yabancı Dil)', skill_primary:'Sınıf Öğretmenliği', skill_curriculum:'Müfredat Geliştirme',
+    skill_comm_title:'İletişim & Koordinasyon',
+    skill_ar_social:'Arapça Sosyal Medya Yönetimi', skill_ngo:'STK İletişimi', skill_reporting:'Raporlama', skill_translation:'Çeviri & Yerelleştirme',
+    skill_tech_title:'Teknoloji', skill_flutter_l:'Flutter (Öğreniyor)', skill_python_l:'Python (Geliştiriyor)',
+    exp_eyebrow:'Kariyer', exp_title:'Deneyim',
+    exp1_org:'Endonezya · Türkçe Öğretmeni', exp1_title:'Türkçe Dil Eğitimi', exp1_period:'2020 – Günümüz',
+    exp1_desc:'Endonezya\'da Türkçeyi yabancı dil olarak öğretiyorum. Ders materyalleri geliştiriyor, öğrencilerin dil becerilerini ölçüyor ve kültürlerarası iletişimi güçlendiriyorum.',
+    exp2_org:'Yardım Kuruluşu', exp2_title:'Grafik Tasarım & Arapça İletişim Uzmanı', exp2_period:'4 Yıl',
+    exp2_desc:'Kurumun görsel kimliğini oluşturacak tasarımlar ürettim; broşür, rapor ve sosyal medya görselleri hazırladım. Arapça konuşan partner kuruluşlarla yazışmaları yürüttüm ve Arapça sosyal medya hesaplarını yönettim.',
+    exp3_org:'Serbest Çalışma', exp3_title:'Grafik Tasarımcı', exp3_period:'Süregelen',
+    exp3_desc:'Adobe Illustrator, Photoshop ve InDesign kullanarak broşür, kitap kapağı, kurumsal kimlik ve sosyal medya içerikleri tasarlıyorum.',
+    contact_eyebrow:'Ulaşın', contact_title:'İletişim',
+    contact_intro:'Türkçe öğretimi, grafik tasarım projeleri veya işbirliği için benimle iletişime geçebilirsiniz.',
+    contact_email:'email@example.com', contact_wa:'WhatsApp ile Yaz',
+    social_show:'👁 Sosyal Medyayı Göster', social_hide:'🙈 Gizle',
+    hizli_mesaj:'Hızlı mesaj gönder',
+    form_name:'Ad Soyad', form_email:'E-posta', form_msg:'Mesajınız...',
+    form_send:'Mesaj Gönder',
+    footer:'© 2025 · Tasarım ile ❤️ yapıldı',
+  },
+  en: {
+    dir: 'ltr',
+    nav_logo: 'AK',
+    nav_about: 'About', nav_langs: 'Languages', nav_skills: 'Skills',
+    nav_exp: 'Experience', nav_contact: 'Contact',
+    hero_label: 'Education · Design · Language',
+    hero_name: 'Hi, I\'m<br><span>[Your Name]</span>',
+    hero_tagline: 'Turkish teacher, graphic designer, and multilingual communicator. Building bridges from Indonesia to the world.',
+    hero_cta1: 'Get in Touch', hero_cta2: 'Learn More',
+    about_eyebrow: 'Who I Am', about_title: 'About Me',
+    about_text: '<p>I hold a degree in Primary Education and have been teaching Turkish as a foreign language in Indonesia for 4 years. Alongside teaching, I actively work in graphic design, creating brochures, books, and social media content using Adobe Illustrator, Photoshop, and InDesign.</p><p>I previously worked for a humanitarian organization for 4 years, where I managed Arabic correspondence with partner organizations, tracked reports, and ran the organization\'s Arabic social media accounts.</p><p>I\'m currently learning Chinese, and aiming to expand my skills in Flutter and Python development.</p>',
+    info_location_label:'Location', info_location_val:'Indonesia 🇮🇩',
+    info_edu_label:'Education', info_edu_val:'Primary Education Graduate',
+    info_role_label:'Roles', info_role_val:'Turkish Teacher · Graphic Designer',
+    info_interest_label:'Currently Learning', info_interest_val:'Chinese 🇨🇳 · Flutter · Python',
+    lang_eyebrow:'Multilingual', lang_title:'Languages',
+    lang_tr:'Turkish', lang_tr_level:'Native',
+    lang_ar:'Arabic', lang_ar_level:'Advanced · Professional',
+    lang_id:'Indonesian', lang_id_level:'Advanced · 4 Years',
+    lang_en:'English', lang_en_level:'Intermediate',
+    lang_zh:'Chinese', lang_zh_level:'Learning...', lang_learning:'Learning Journey',
+    skills_eyebrow:'Expertise', skills_title:'Skills',
+    skill_design_title:'Graphic Design',
+    skill_brochure:'Brochure Design', skill_book:'Book Design', skill_social:'Social Media Design',
+    skill_edu_title:'Education',
+    skill_teach_tr:'Turkish Teaching (Foreign Language)', skill_primary:'Primary Education', skill_curriculum:'Curriculum Development',
+    skill_comm_title:'Communication & Coordination',
+    skill_ar_social:'Arabic Social Media Management', skill_ngo:'NGO Communication', skill_reporting:'Reporting', skill_translation:'Translation & Localization',
+    skill_tech_title:'Technology', skill_flutter_l:'Flutter (Learning)', skill_python_l:'Python (Developing)',
+    exp_eyebrow:'Career', exp_title:'Experience',
+    exp1_org:'Indonesia · Turkish Teacher', exp1_title:'Turkish Language Education', exp1_period:'2020 – Present',
+    exp1_desc:'Teaching Turkish as a foreign language in Indonesia. Developing course materials, assessing language skills, and fostering cross-cultural communication.',
+    exp2_org:'Humanitarian Organization', exp2_title:'Graphic Designer & Arabic Communications Specialist', exp2_period:'4 Years',
+    exp2_desc:'Produced designs for institutional identity, brochures, reports, and social media. Managed Arabic correspondence with partner organizations, tracked reports, and ran the Arabic social media accounts. Adapted designs for RTL layout.',
+    exp3_org:'Freelance', exp3_title:'Graphic Designer', exp3_period:'Ongoing',
+    exp3_desc:'Creating brochures, book covers, corporate identity, and social media content using Adobe Illustrator, Photoshop, and InDesign.',
+    contact_eyebrow:'Reach Out', contact_title:'Contact',
+    contact_intro:'Feel free to reach out for Turkish teaching, graphic design projects, or collaboration opportunities.',
+    contact_email:'email@example.com', contact_wa:'Message on WhatsApp',
+    social_show:'👁 Show Social Media', social_hide:'🙈 Hide',
+    hizli_mesaj:'Send a quick message',
+    form_name:'Full Name', form_email:'Email', form_msg:'Your message...',
+    form_send:'Send Message',
+    footer:'© 2025 · Made with ❤️',
+  },
+  id: {
+    dir: 'ltr',
+    nav_logo: 'AK',
+    nav_about: 'Tentang', nav_langs: 'Bahasa', nav_skills: 'Keahlian',
+    nav_exp: 'Pengalaman', nav_contact: 'Kontak',
+    hero_label: 'Pendidikan · Desain · Bahasa',
+    hero_name: 'Halo, saya<br><span>[Nama Anda]</span>',
+    hero_tagline: 'Guru Bahasa Turki, desainer grafis, dan komunikator multibahasa. Membangun jembatan dari Indonesia ke dunia.',
+    hero_cta1: 'Hubungi Saya', hero_cta2: 'Selengkapnya',
+    about_eyebrow: 'Siapa Saya', about_title: 'Tentang Saya',
+    about_text: '<p>Saya lulusan Pendidikan Guru Sekolah Dasar dan selama 4 tahun mengajar Bahasa Turki sebagai bahasa asing di Indonesia. Selain mengajar, saya aktif di bidang desain grafis, membuat brosur, buku, dan konten media sosial menggunakan Adobe Illustrator, Photoshop, dan InDesign.</p><p>Sebelumnya saya bekerja di lembaga kemanusiaan selama 4 tahun, mengelola korespondensi Bahasa Arab dengan organisasi mitra, memantau laporan, dan mengelola akun media sosial Bahasa Arab lembaga tersebut.</p><p>Saat ini saya sedang belajar Bahasa Mandarin, dan berencana mengembangkan keterampilan Flutter dan Python.</p>',
+    info_location_label:'Lokasi', info_location_val:'Indonesia 🇮🇩',
+    info_edu_label:'Pendidikan', info_edu_val:'S1 PGSD',
+    info_role_label:'Peran', info_role_val:'Guru Bahasa Turki · Desainer Grafis',
+    info_interest_label:'Sedang Belajar', info_interest_val:'Mandarin 🇨🇳 · Flutter · Python',
+    lang_eyebrow:'Multibahasa', lang_title:'Bahasa',
+    lang_tr:'Bahasa Turki', lang_tr_level:'Bahasa Ibu',
+    lang_ar:'Bahasa Arab', lang_ar_level:'Mahir · Profesional',
+    lang_id:'Bahasa Indonesia', lang_id_level:'Mahir · 4 Tahun',
+    lang_en:'Bahasa Inggris', lang_en_level:'Menengah',
+    lang_zh:'Bahasa Mandarin', lang_zh_level:'Sedang dipelajari...', lang_learning:'Perjalanan Belajar',
+    skills_eyebrow:'Keahlian', skills_title:'Keahlian',
+    skill_design_title:'Desain Grafis',
+    skill_brochure:'Desain Brosur', skill_book:'Desain Buku', skill_social:'Desain Media Sosial',
+    skill_edu_title:'Pendidikan',
+    skill_teach_tr:'Pengajaran Bahasa Turki', skill_primary:'Pendidikan Dasar', skill_curriculum:'Pengembangan Kurikulum',
+    skill_comm_title:'Komunikasi & Koordinasi',
+    skill_ar_social:'Manajemen Media Sosial Arab', skill_ngo:'Komunikasi LSM', skill_reporting:'Pelaporan', skill_translation:'Terjemahan & Lokalisasi',
+    skill_tech_title:'Teknologi', skill_flutter_l:'Flutter (Belajar)', skill_python_l:'Python (Berkembang)',
+    exp_eyebrow:'Karier', exp_title:'Pengalaman',
+    exp1_org:'Indonesia · Guru Bahasa Turki', exp1_title:'Pendidikan Bahasa Turki', exp1_period:'2020 – Sekarang',
+    exp1_desc:'Mengajar Bahasa Turki sebagai bahasa asing di Indonesia. Mengembangkan materi ajar, menilai kemampuan bahasa, dan mempererat komunikasi lintas budaya.',
+    exp2_org:'Lembaga Kemanusiaan', exp2_title:'Desainer Grafis & Spesialis Komunikasi Arab', exp2_period:'4 Tahun',
+    exp2_desc:'Membuat desain identitas kelembagaan, brosur, laporan, dan media sosial. Mengelola korespondensi Bahasa Arab dengan organisasi mitra dan mengelola akun media sosial Bahasa Arab. Mengadaptasi desain ke format RTL.',
+    exp3_org:'Freelance', exp3_title:'Desainer Grafis', exp3_period:'Berlanjut',
+    exp3_desc:'Membuat brosur, sampul buku, identitas korporat, dan konten media sosial menggunakan Adobe Illustrator, Photoshop, dan InDesign.',
+    contact_eyebrow:'Hubungi', contact_title:'Kontak',
+    contact_intro:'Silakan hubungi saya untuk pengajaran Bahasa Turki, proyek desain grafis, atau peluang kolaborasi.',
+    contact_email:'email@example.com', contact_wa:'Chat di WhatsApp',
+    social_show:'👁 Tampilkan Media Sosial', social_hide:'🙈 Sembunyikan',
+    hizli_mesaj:'Kirim pesan cepat',
+    form_name:'Nama Lengkap', form_email:'Email', form_msg:'Pesan Anda...',
+    form_send:'Kirim Pesan',
+    footer:'© 2025 · Dibuat dengan ❤️',
+  },
+  ar: {
+    dir: 'rtl',
+    nav_logo: 'أ.ك',
+    nav_about: 'نبذة عني', nav_langs: 'اللغات', nav_skills: 'المهارات',
+    nav_exp: 'الخبرات', nav_contact: 'التواصل',
+    hero_label: 'التعليم · التصميم · اللغة',
+    hero_name: 'مرحباً، أنا<br><span>[اسمك]</span>',
+    hero_tagline: 'معلم اللغة التركية، ومصمم جرافيك، ومتعدد اللغات. أبني جسوراً بين إندونيسيا والعالم.',
+    hero_cta1: 'تواصل معي', hero_cta2: 'اعرف أكثر',
+    about_eyebrow: 'من أنا', about_title: 'نبذة عني',
+    about_text: '<p>أنا خريج تعليم ابتدائي، وأعمل منذ 4 سنوات معلماً للغة التركية كلغة أجنبية في إندونيسيا. إلى جانب التدريس، أعمل في مجال التصميم الجرافيكي، وأنتج بروشورات وكتباً ومحتوى لوسائل التواصل الاجتماعي باستخدام Adobe Illustrator وPhotoshop وInDesign.</p><p>عملت سابقاً في منظمة إنسانية لمدة 4 سنوات، حيث أدرت المراسلات باللغة العربية مع المنظمات الشريكة وتابعت التقارير وأدرت حسابات التواصل الاجتماعي باللغة العربية.</p><p>أتعلم حالياً اللغة الصينية وأسعى لتطوير مهاراتي في Flutter وPython.</p>',
+    info_location_label:'الموقع', info_location_val:'إندونيسيا 🇮🇩',
+    info_edu_label:'التعليم', info_edu_val:'بكالوريوس تعليم ابتدائي',
+    info_role_label:'الأدوار', info_role_val:'معلم تركي · مصمم جرافيك',
+    info_interest_label:'أتعلم حالياً', info_interest_val:'الصينية 🇨🇳 · Flutter · Python',
+    lang_eyebrow:'متعدد اللغات', lang_title:'اللغات',
+    lang_tr:'التركية', lang_tr_level:'اللغة الأم',
+    lang_ar:'العربية', lang_ar_level:'متقدم · احترافي',
+    lang_id:'الإندونيسية', lang_id_level:'متقدم · 4 سنوات',
+    lang_en:'الإنجليزية', lang_en_level:'متوسط',
+    lang_zh:'الصينية', lang_zh_level:'قيد التعلم...', lang_learning:'رحلة التعلم',
+    skills_eyebrow:'الخبرات', skills_title:'المهارات',
+    skill_design_title:'التصميم الجرافيكي',
+    skill_brochure:'تصميم البروشورات', skill_book:'تصميم الكتب', skill_social:'تصميم وسائل التواصل',
+    skill_edu_title:'التعليم',
+    skill_teach_tr:'تعليم اللغة التركية (لغة أجنبية)', skill_primary:'التعليم الابتدائي', skill_curriculum:'تطوير المناهج',
+    skill_comm_title:'التواصل والتنسيق',
+    skill_ar_social:'إدارة التواصل الاجتماعي العربي', skill_ngo:'تواصل المنظمات', skill_reporting:'إعداد التقارير', skill_translation:'الترجمة والتعريب',
+    skill_tech_title:'التقنية', skill_flutter_l:'Flutter (قيد التعلم)', skill_python_l:'Python (تطوير)',
+    exp_eyebrow:'المسيرة', exp_title:'الخبرات',
+    exp1_org:'إندونيسيا · معلم تركي', exp1_title:'تعليم اللغة التركية', exp1_period:'2020 – حتى الآن',
+    exp1_desc:'أدرّس اللغة التركية كلغة أجنبية في إندونيسيا. أطور المواد التعليمية، وأقيّم المهارات اللغوية، وأعزز التواصل بين الثقافات.',
+    exp2_org:'منظمة إنسانية', exp2_title:'مصمم جرافيك ومتخصص تواصل عربي', exp2_period:'4 سنوات',
+    exp2_desc:'أنتجت تصاميم للهوية المؤسسية والبروشورات والتقارير ووسائل التواصل الاجتماعي. أدرت المراسلات باللغة العربية مع المنظمات الشريكة وتابعت التقارير وأدرت الحسابات العربية. كيّفت التصاميم للقراءة من اليمين إلى اليسار.',
+    exp3_org:'عمل حر', exp3_title:'مصمم جرافيك', exp3_period:'مستمر',
+    exp3_desc:'تصميم بروشورات وأغلفة كتب وهويات مؤسسية ومحتوى وسائل التواصل باستخدام Adobe Illustrator وPhotoshop وInDesign.',
+    contact_eyebrow:'تواصل', contact_title:'التواصل',
+    contact_intro:'لا تتردد في التواصل معي لتعليم اللغة التركية أو مشاريع التصميم أو فرص التعاون.',
+    contact_email:'email@example.com', contact_wa:'تواصل عبر واتساب',
+    social_show:'👁 عرض وسائل التواصل', social_hide:'🙈 إخفاء',
+    hizli_mesaj:'أرسل رسالة سريعة',
+    form_name:'الاسم الكامل', form_email:'البريد الإلكتروني', form_msg:'رسالتك...',
+    form_send:'إرسال الرسالة',
+    footer:'© 2025 · صُنع بـ ❤️',
+  }
+};
+
+let currentLang = 'tr';
+let socialVisible = false;
+
+function setLang(lang) {
+  currentLang = lang;
+  const t = translations[lang];
+  document.documentElement.lang = lang;
+  document.body.dir = t.dir;
+
+  // Update lang buttons
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+  });
+
+  // Update text nodes
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) {
+      el.innerHTML = t[key];
+    }
+  });
+
+  // Update placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (t[key]) el.placeholder = t[key];
+  });
+
+  // RTL/LTR section dividers
+  if (t.dir === 'rtl') {
+    document.querySelectorAll('.section-divider').forEach(d => {
+      d.style.margin = '0.8rem 0 0 auto';
+      d.style.marginRight = '0';
+    });
+  } else {
+    document.querySelectorAll('.section-divider').forEach(d => {
+      d.style.margin = '0.8rem 0 0';
+    });
+  }
+}
+
+function toggleSocial() {
+  socialVisible = !socialVisible;
+  const links = document.getElementById('socialLinks');
+  const btn = document.getElementById('socialToggleBtn');
+  const t = translations[currentLang];
+  links.style.display = socialVisible ? 'flex' : 'none';
+  btn.querySelector('[data-i18n]').textContent = socialVisible ? t.social_hide : t.social_show;
+}
+
+function sendMail(e) {
+  e.preventDefault();
+  const name = document.getElementById('msgName').value;
+  const body = document.getElementById('msgBody').value;
+  const email = encodeURIComponent('email@example.com');
+  const subject = encodeURIComponent(`Mesaj: ${name}`);
+  const bodyEnc = encodeURIComponent(body);
+  window.location.href = `mailto:${email}?subject=${subject}&body=${bodyEnc}`;
+}
+
+// Init
+setLang('tr');
+</script>
+</body>
+</html>
