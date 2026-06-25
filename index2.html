@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portfolyo</title>
+  <title>İbrahim Yüzer</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Amiri:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -38,12 +38,7 @@
       padding: 0 5%;
       height: 60px;
     }
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      color: var(--gold);
-      letter-spacing: 1px;
-    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--gold); letter-spacing: 0.5px; }
     .nav-links { display:flex; gap:1.5rem; align-items:center; flex-wrap:wrap; }
     .nav-links a {
       color: var(--text-muted);
@@ -75,7 +70,7 @@
 
     /* SECTIONS */
     section { padding: 90px 10%; }
-    section:first-of-type { padding-top: 140px; }
+    #hero { padding: 0 10%; }
 
     /* HERO */
     #hero {
@@ -92,6 +87,28 @@
       background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
       pointer-events:none;
     }
+    .hero-inner { display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
+    .hero-photo-wrap { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
+    .hero-photo-placeholder {
+      width: 180px; height: 180px; border-radius: 50%;
+      border: 3px dashed var(--gold);
+      background: var(--surface);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 0.4rem; cursor: pointer; transition: all 0.2s;
+      box-shadow: 0 0 40px rgba(201,168,76,0.1);
+    }
+    .hero-photo-placeholder:hover { background: var(--surface2); border-color: var(--gold-light); }
+    .hero-photo-placeholder .photo-icon { font-size: 2.2rem; }
+    .hero-photo-placeholder .photo-text { font-size: 0.68rem; color: var(--text-muted); text-align: center; line-height: 1.4; }
+    .hero-photo-img {
+      width: 180px; height: 180px; border-radius: 50%;
+      border: 3px solid var(--gold);
+      object-fit: cover;
+      box-shadow: 0 0 40px rgba(201,168,76,0.2);
+      display: none;
+    }
+    #photoInput { display: none; }
+    @media(max-width:768px) { .hero-photo-wrap { display: none; } .hero-inner { grid-template-columns: 1fr; } }
     .hero-label {
       font-size:0.8rem; font-weight:600; letter-spacing:3px;
       color: var(--gold); text-transform:uppercase; margin-bottom:1rem;
@@ -257,25 +274,8 @@
       font-size:1rem; flex-shrink:0;
     }
 
-    /* SOCIAL TOGGLE */
-    .social-section { margin-top:2rem; }
-    .social-toggle-btn {
-      background:transparent; border:1px dashed var(--border);
-      color:var(--text-muted); padding:7px 16px; border-radius:6px;
-      cursor:pointer; font-size:0.82rem; transition:all 0.2s; margin-bottom:1rem;
-    }
-    .social-toggle-btn:hover { border-color:var(--gold); color:var(--gold); }
-    .social-links {
-      display:flex; flex-wrap:wrap; gap:0.8rem;
-      transition: all 0.3s;
-    }
-    .social-link {
-      display:flex; align-items:center; gap:0.5rem;
-      background:var(--surface2); border:1px solid var(--border);
-      color:var(--text-muted); text-decoration:none;
-      padding:7px 14px; border-radius:8px; font-size:0.85rem;
-      transition: all 0.2s;
-    }
+    /* SOCIAL LINKS */
+    .social-link { display:flex; align-items:center; gap:0.5rem; background:var(--surface2); border:1px solid var(--border); color:var(--text-muted); text-decoration:none; padding:7px 14px; border-radius:8px; font-size:0.85rem; transition: all 0.2s; }
     .social-link:hover { border-color:var(--gold); color:var(--gold); }
 
     /* FOOTER */
@@ -299,7 +299,7 @@
 <body>
 
 <nav>
-  <div class="nav-logo" data-i18n="nav_logo">AK</div>
+  <div class="nav-logo" data-i18n="nav_logo">İbrahim Yüzer</div>
   <div class="nav-links">
     <a href="#about" data-i18n="nav_about">Hakkımda</a>
     <a href="#languages" data-i18n="nav_langs">Diller</a>
@@ -317,14 +317,27 @@
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-label" data-i18n="hero_label">Eğitim · Tasarım · Dil</div>
-  <h1 class="hero-name" data-i18n="hero_name">Merhaba, ben<br><span>[Adınız]</span></h1>
-  <p class="hero-tagline" data-i18n="hero_tagline">
-    Türkçe öğretmeni, grafik tasarımcı ve çok dilli iletişim uzmanı. Endonezya'dan dünyaya köprüler kuruyorum.
-  </p>
-  <div class="hero-btns">
-    <a href="#contact" class="btn btn-primary" data-i18n="hero_cta1">İletişime Geç</a>
-    <a href="#about" class="btn btn-outline" data-i18n="hero_cta2">Daha Fazla</a>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-label" data-i18n="hero_label">Eğitim · Tasarım · Dil</div>
+      <h1 class="hero-name" data-i18n="hero_name">Merhaba, ben<br><span>İbrahim Yüzer</span></h1>
+      <p class="hero-tagline" data-i18n="hero_tagline">
+        Türkçe öğretmeni, grafik tasarımcı ve çok dilli iletişim uzmanı. Endonezya'dan dünyaya köprüler kuruyorum.
+      </p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn btn-primary" data-i18n="hero_cta1">İletişime Geç</a>
+        <a href="#about" class="btn btn-outline" data-i18n="hero_cta2">Daha Fazla</a>
+      </div>
+    </div>
+    <!-- Profil fotoğrafı -->
+    <div class="hero-photo-wrap">
+      <input type="file" id="photoInput" accept="image/*" onchange="loadPhoto(event)"/>
+      <div id="photoPlaceholder" class="hero-photo-placeholder" onclick="document.getElementById('photoInput').click()">
+        <div class="photo-icon">📷</div>
+        <div class="photo-text" data-i18n="photo_hint">Fotoğraf ekle<br>(tıkla)</div>
+      </div>
+      <img id="profilePhoto" class="hero-photo-img" src="" alt="İbrahim Yüzer"/>
+    </div>
   </div>
 </section>
 
@@ -388,11 +401,12 @@
       <div class="lang-level" data-i18n="lang_id_level">İleri Düzey · 4 Yıl</div>
       <div class="lang-bar-bg"><div class="lang-bar-fill" style="width:85%"></div></div>
     </div>
-    <div class="lang-card">
+    <div class="lang-card" style="border-style:dashed;">
       <div class="lang-flag">🇬🇧</div>
       <div class="lang-name" data-i18n="lang_en">İngilizce</div>
-      <div class="lang-level" data-i18n="lang_en_level">İyi Düzey</div>
-      <div class="lang-bar-bg"><div class="lang-bar-fill" style="width:70%"></div></div>
+      <div class="lang-level" data-i18n="lang_en_level">Orta Düzey</div>
+      <div class="lang-bar-bg"><div class="lang-bar-fill" style="width:55%"></div></div>
+      <span class="learning-badge" data-i18n="lang_en_badge">Geliştiriliyor</span>
     </div>
     <div class="lang-card" style="border-style:dashed;">
       <div class="lang-flag">🇨🇳</div>
@@ -527,18 +541,22 @@
         </a>
       </div>
 
-      <!-- SOCIAL MEDIA -->
-      <div class="social-section">
-        <button class="social-toggle-btn" onclick="toggleSocial()" id="socialToggleBtn">
-          <span data-i18n="social_show">👁 Sosyal Medyayı Göster</span>
-        </button>
-        <div class="social-links" id="socialLinks" style="display:none;">
-          <a href="#" class="social-link" target="_blank">📸 <span>Instagram</span></a>
-          <a href="#" class="social-link" target="_blank">🐦 <span>Twitter / X</span></a>
-          <a href="#" class="social-link" target="_blank">💼 <span>LinkedIn</span></a>
-          <a href="#" class="social-link" target="_blank">📘 <span>Facebook</span></a>
-        </div>
+      <!-- ================================================================
+           SOSYAL MEDYA LİNKLERİ — Göstermek için aşağıdaki HTML bloğunu
+           yorum dışına alın (<!-- ve --> işaretlerini kaldırın) ve
+           KULLANICI_ADI kısımlarını doldurun.
+           ================================================================
+      -->
+      <!--
+      <div style="margin-top:1.2rem; display:flex; flex-wrap:wrap; gap:0.8rem;">
+        <a href="https://instagram.com/KULLANICI_ADI" class="social-link" target="_blank">📸 Instagram</a>
+        <a href="https://twitter.com/KULLANICI_ADI" class="social-link" target="_blank">🐦 Twitter / X</a>
+        <a href="https://linkedin.com/in/KULLANICI_ADI" class="social-link" target="_blank">💼 LinkedIn</a>
+        <a href="https://facebook.com/KULLANICI_ADI" class="social-link" target="_blank">📘 Facebook</a>
+        <a href="https://youtube.com/@KULLANICI_ADI" class="social-link" target="_blank">▶️ YouTube</a>
+        <a href="https://t.me/KULLANICI_ADI" class="social-link" target="_blank">✈️ Telegram</a>
       </div>
+      -->
     </div>
 
     <div style="background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius); padding:2rem;">
@@ -561,11 +579,11 @@
 const translations = {
   tr: {
     dir: 'ltr',
-    nav_logo: 'AK',
-    nav_about: 'Hakkımda', nav_langs: 'Diller', nav_skills: 'Beceriler',
-    nav_exp: 'Deneyim', nav_contact: 'İletişim',
+    nav_logo: 'İbrahim Yüzer',
+    nav_about: 'Hakkımda', nav_langs: 'Diller', nav_skills: 'Beceriler', nav_exp: 'Deneyim', nav_contact: 'İletişim',
     hero_label: 'Eğitim · Tasarım · Dil',
-    hero_name: 'Merhaba, ben<br><span>[Adınız]</span>',
+    hero_name: 'Merhaba, ben<br><span>İbrahim Yüzer</span>',
+    photo_hint: 'Fotoğraf ekle<br>(tıkla)',
     hero_tagline: 'Türkçe öğretmeni, grafik tasarımcı ve çok dilli iletişim uzmanı. Endonezya\'dan dünyaya köprüler kuruyorum.',
     hero_cta1: 'İletişime Geç', hero_cta2: 'Daha Fazla',
     about_eyebrow: 'Kimim', about_title: 'Hakkımda',
@@ -578,7 +596,7 @@ const translations = {
     lang_tr:'Türkçe', lang_tr_level:'Anadil',
     lang_ar:'Arapça', lang_ar_level:'İleri Düzey · Profesyonel',
     lang_id:'Endonezce', lang_id_level:'İleri Düzey · 4 Yıl',
-    lang_en:'İngilizce', lang_en_level:'İyi Düzey',
+    lang_en:'İngilizce', lang_en_level:'Orta Düzey', lang_en_badge:'Geliştiriliyor',
     lang_zh:'Çince', lang_zh_level:'Öğreniliyor...', lang_learning:'Öğrenme Yolculuğu',
     skills_eyebrow:'Uzmanlık', skills_title:'Beceriler',
     skill_design_title:'Grafik Tasarım',
@@ -602,15 +620,16 @@ const translations = {
     hizli_mesaj:'Hızlı mesaj gönder',
     form_name:'Ad Soyad', form_email:'E-posta', form_msg:'Mesajınız...',
     form_send:'Mesaj Gönder',
-    footer:'© 2025 · Tasarım ile ❤️ yapıldı',
+    footer:'© 2025 İbrahim Yüzer · Tasarım ile ❤️ yapıldı',
   },
   en: {
     dir: 'ltr',
-    nav_logo: 'AK',
+    nav_logo: 'Ibrahim Yüzer',
     nav_about: 'About', nav_langs: 'Languages', nav_skills: 'Skills',
     nav_exp: 'Experience', nav_contact: 'Contact',
     hero_label: 'Education · Design · Language',
-    hero_name: 'Hi, I\'m<br><span>[Your Name]</span>',
+    hero_name: 'Hi, I\'m<br><span>Ibrahim Yüzer</span>',
+    photo_hint: 'Add photo<br>(click)',
     hero_tagline: 'Turkish teacher, graphic designer, and multilingual communicator. Building bridges from Indonesia to the world.',
     hero_cta1: 'Get in Touch', hero_cta2: 'Learn More',
     about_eyebrow: 'Who I Am', about_title: 'About Me',
@@ -623,7 +642,7 @@ const translations = {
     lang_tr:'Turkish', lang_tr_level:'Native',
     lang_ar:'Arabic', lang_ar_level:'Advanced · Professional',
     lang_id:'Indonesian', lang_id_level:'Advanced · 4 Years',
-    lang_en:'English', lang_en_level:'Intermediate',
+    lang_en:'English', lang_en_level:'Intermediate', lang_en_badge:'Developing',
     lang_zh:'Chinese', lang_zh_level:'Learning...', lang_learning:'Learning Journey',
     skills_eyebrow:'Expertise', skills_title:'Skills',
     skill_design_title:'Graphic Design',
@@ -651,11 +670,12 @@ const translations = {
   },
   id: {
     dir: 'ltr',
-    nav_logo: 'AK',
+    nav_logo: 'Ibrahim Yüzer',
     nav_about: 'Tentang', nav_langs: 'Bahasa', nav_skills: 'Keahlian',
     nav_exp: 'Pengalaman', nav_contact: 'Kontak',
     hero_label: 'Pendidikan · Desain · Bahasa',
-    hero_name: 'Halo, saya<br><span>[Nama Anda]</span>',
+    hero_name: 'Halo, saya<br><span>Ibrahim Yüzer</span>',
+    photo_hint: 'Tambah foto<br>(klik)',
     hero_tagline: 'Guru Bahasa Turki, desainer grafis, dan komunikator multibahasa. Membangun jembatan dari Indonesia ke dunia.',
     hero_cta1: 'Hubungi Saya', hero_cta2: 'Selengkapnya',
     about_eyebrow: 'Siapa Saya', about_title: 'Tentang Saya',
@@ -668,7 +688,7 @@ const translations = {
     lang_tr:'Bahasa Turki', lang_tr_level:'Bahasa Ibu',
     lang_ar:'Bahasa Arab', lang_ar_level:'Mahir · Profesional',
     lang_id:'Bahasa Indonesia', lang_id_level:'Mahir · 4 Tahun',
-    lang_en:'Bahasa Inggris', lang_en_level:'Menengah',
+    lang_en:'Bahasa Inggris', lang_en_level:'Menengah', lang_en_badge:'Sedang Dikembangkan',
     lang_zh:'Bahasa Mandarin', lang_zh_level:'Sedang dipelajari...', lang_learning:'Perjalanan Belajar',
     skills_eyebrow:'Keahlian', skills_title:'Keahlian',
     skill_design_title:'Desain Grafis',
@@ -692,15 +712,16 @@ const translations = {
     hizli_mesaj:'Kirim pesan cepat',
     form_name:'Nama Lengkap', form_email:'Email', form_msg:'Pesan Anda...',
     form_send:'Kirim Pesan',
-    footer:'© 2025 · Dibuat dengan ❤️',
+    footer:'© 2025 Ibrahim Yüzer · Dibuat dengan ❤️',
   },
   ar: {
     dir: 'rtl',
-    nav_logo: 'أ.ك',
+    nav_logo: 'إبراهيم يوزر',
     nav_about: 'نبذة عني', nav_langs: 'اللغات', nav_skills: 'المهارات',
     nav_exp: 'الخبرات', nav_contact: 'التواصل',
     hero_label: 'التعليم · التصميم · اللغة',
-    hero_name: 'مرحباً، أنا<br><span>[اسمك]</span>',
+    hero_name: 'مرحباً، أنا<br><span>إبراهيم يوزر</span>',
+    photo_hint: 'أضف صورة<br>(انقر)',
     hero_tagline: 'معلم اللغة التركية، ومصمم جرافيك، ومتعدد اللغات. أبني جسوراً بين إندونيسيا والعالم.',
     hero_cta1: 'تواصل معي', hero_cta2: 'اعرف أكثر',
     about_eyebrow: 'من أنا', about_title: 'نبذة عني',
@@ -713,7 +734,7 @@ const translations = {
     lang_tr:'التركية', lang_tr_level:'اللغة الأم',
     lang_ar:'العربية', lang_ar_level:'متقدم · احترافي',
     lang_id:'الإندونيسية', lang_id_level:'متقدم · 4 سنوات',
-    lang_en:'الإنجليزية', lang_en_level:'متوسط',
+    lang_en:'الإنجليزية', lang_en_level:'متوسط', lang_en_badge:'قيد التطوير',
     lang_zh:'الصينية', lang_zh_level:'قيد التعلم...', lang_learning:'رحلة التعلم',
     skills_eyebrow:'الخبرات', skills_title:'المهارات',
     skill_design_title:'التصميم الجرافيكي',
@@ -737,12 +758,11 @@ const translations = {
     hizli_mesaj:'أرسل رسالة سريعة',
     form_name:'الاسم الكامل', form_email:'البريد الإلكتروني', form_msg:'رسالتك...',
     form_send:'إرسال الرسالة',
-    footer:'© 2025 · صُنع بـ ❤️',
+    footer:'© 2025 إبراهيم يوزر · صُنع بـ ❤️',
   }
 };
 
 let currentLang = 'tr';
-let socialVisible = false;
 
 function setLang(lang) {
   currentLang = lang;
@@ -750,30 +770,23 @@ function setLang(lang) {
   document.documentElement.lang = lang;
   document.body.dir = t.dir;
 
-  // Update lang buttons
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
   });
 
-  // Update text nodes
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
-    if (t[key] !== undefined) {
-      el.innerHTML = t[key];
-    }
+    if (t[key] !== undefined) el.innerHTML = t[key];
   });
 
-  // Update placeholders
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     const key = el.getAttribute('data-i18n-placeholder');
     if (t[key]) el.placeholder = t[key];
   });
 
-  // RTL/LTR section dividers
   if (t.dir === 'rtl') {
     document.querySelectorAll('.section-divider').forEach(d => {
-      d.style.margin = '0.8rem 0 0 auto';
-      d.style.marginRight = '0';
+      d.style.margin = '0.8rem auto 0 0';
     });
   } else {
     document.querySelectorAll('.section-divider').forEach(d => {
@@ -782,26 +795,27 @@ function setLang(lang) {
   }
 }
 
-function toggleSocial() {
-  socialVisible = !socialVisible;
-  const links = document.getElementById('socialLinks');
-  const btn = document.getElementById('socialToggleBtn');
-  const t = translations[currentLang];
-  links.style.display = socialVisible ? 'flex' : 'none';
-  btn.querySelector('[data-i18n]').textContent = socialVisible ? t.social_hide : t.social_show;
+function loadPhoto(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    document.getElementById('profilePhoto').src = e.target.result;
+    document.getElementById('profilePhoto').style.display = 'block';
+    document.getElementById('photoPlaceholder').style.display = 'none';
+  };
+  reader.readAsDataURL(file);
 }
 
 function sendMail(e) {
   e.preventDefault();
   const name = document.getElementById('msgName').value;
   const body = document.getElementById('msgBody').value;
-  const email = encodeURIComponent('email@example.com');
-  const subject = encodeURIComponent(`Mesaj: ${name}`);
+  const subject = encodeURIComponent('Mesaj: ' + name);
   const bodyEnc = encodeURIComponent(body);
-  window.location.href = `mailto:${email}?subject=${subject}&body=${bodyEnc}`;
+  window.location.href = 'mailto:email@example.com?subject=' + subject + '&body=' + bodyEnc;
 }
 
-// Init
 setLang('tr');
 </script>
 </body>
